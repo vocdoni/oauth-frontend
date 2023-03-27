@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -13,8 +12,8 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
-        <div className={styles.description}>
+      <main>
+        <div>
           <iframe src="/vocdoni-widget?electionId=84fc9db5b752e15b00567446ada48f31e9db03ab128ae592269381e200a2065a&handlers=facebook,github" style={{ display: "block", margin: "0 auto", border:'1px solid red', width: '600px', height: '400px' }}></iframe>
         </div>
       </main>

@@ -1,3 +1,4 @@
+import { VocdoniSDKClient } from '@vocdoni/sdk';
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
@@ -16,6 +17,14 @@ export default function VocdoniWidget() {
     window.addEventListener('message', (event) => {
       getOAuthToken(event.data.code, event.data.handler);
     });
+
+    // Client initialization
+    // const client = new VocdoniSDKClient({
+    //   env: EnvOptions.DEV,
+    //   wallet: signer, // the signer used (Metamask, Walletconnect)
+    //   electionId: '934234...', // The election identifier
+    //   csp_url: CSP_URL // The CSP url defined when creating an election
+    // })
   },[electionId]);
 
   useEffect(() => {
@@ -33,7 +42,7 @@ export default function VocdoniWidget() {
   const handleServiceClick = async (handler: string) => {
     const redirectURL = `${window.location.href.replace(`&handlers=${handlers}`, `&handler=${handler}`)}`;
     const { data } = await axios.post(
-      `http://localhost:5000/v1/auth/elections/${electionId}/blind/auth/0`,
+      `${process.env.NEXT_PUBLIC_CSP_URL}/v1/auth/elections/${electionId}/blind/auth/0`,
       { "authData": [handler, redirectURL] }
     );
 
@@ -70,7 +79,7 @@ export default function VocdoniWidget() {
     const electionId = redirectURL.split('?')[1].split('&').find((param: string) => param.startsWith('electionId='))?.split('=')[1];
 
     const { data } = await axios.post(
-      `http://localhost:5000/v1/auth/elections/${electionId}/blind/auth/1`,
+      `${process.env.NEXT_PUBLIC_CSP_URL}/v1/auth/elections/${electionId}/blind/auth/1`,
       { "authData": [handler, code, redirectURL] }
     );
 
