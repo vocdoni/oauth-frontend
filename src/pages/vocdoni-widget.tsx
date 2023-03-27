@@ -1,32 +1,45 @@
-import { VocdoniSDKClient } from '@vocdoni/sdk';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { EnvOptions, VocdoniSDKClient } from '@vocdoni/sdk';
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import { useSigner } from 'wagmi';
 
 export default function VocdoniWidget() {
   const router = useRouter();
   const { electionId, handlers, handler, code }: { electionId: string, handlers: string, handler: string, code: string} = router.query as any;
 
-  const [profile, setProfile] = useState<any>(null);
+  const { data: signer, isError, isLoading } = useSigner();
 
+  const [profile, setProfile] = useState<any>(null);
+  const [vocdoniClient, setVocdoniClient] = useState<any>(null);
+
+  // Vocdoni Client initialization
   useEffect(() => {
     if(!electionId) return;
-    if(window.opener) return;
+    if(!signer) return;
 
-    // Check if there's a message from the popup window
+    const client = new VocdoniSDKClient({
+      env: EnvOptions.DEV,
+      wallet: signer, // the signer used (Metamask, Walletconnect)
+      electionId: electionId, // The election identifier
+      csp_url: process.env.NEXT_PUBLIC_CSP_URL // The CSP url defined when creating an election
+    });
+
+    console.log('This is de Vocdoni Client: ', client);
+
+    setVocdoniClient(client);
+  }, [signer, electionId]);
+
+  // Listening for the popup window meessage
+  useEffect(() => {
+    if(window.opener) return;
     window.addEventListener('message', (event) => {
       getOAuthToken(event.data.code, event.data.handler);
     });
+  },[]);
 
-    // Client initialization
-    // const client = new VocdoniSDKClient({
-    //   env: EnvOptions.DEV,
-    //   wallet: signer, // the signer used (Metamask, Walletconnect)
-    //   electionId: '934234...', // The election identifier
-    //   csp_url: CSP_URL // The CSP url defined when creating an election
-    // })
-  },[electionId]);
-
+  // Posting the message to the main window
   useEffect(() => {
     (async () => {
       if(!code || !handler) return;
@@ -40,12 +53,22 @@ export default function VocdoniWidget() {
   }, [code, handler]); 
 
   const handleServiceClick = async (handler: string) => {
+    if(!vocdoniClient){
+      alert('Vocdoni client not initialized yet');
+      return;
+    }
+
     const redirectURL = `${window.location.href.replace(`&handlers=${handlers}`, `&handler=${handler}`)}`;
+
     const { data } = await axios.post(
       `${process.env.NEXT_PUBLIC_CSP_URL}/v1/auth/elections/${electionId}/blind/auth/0`,
       { "authData": [handler, redirectURL] }
     );
+    console.log('data', data)
 
+    // const step0 = (await vocdoniClient.cspStep(0, [handler, redirectURL])) as ICspIntermediateStepResponse;
+    // console.log('data', step0)
+    
     openLoginPopup(handler, data.response[0])
   }
 
@@ -83,19 +106,27 @@ export default function VocdoniWidget() {
       { "authData": [handler, code, redirectURL] }
     );
 
+    // const step1 = (await vocdoniClient.cspStep(1, [handler, code, redirectURL], step0.authToken)) as ICspFinalStepResponse;
+
     setProfile(JSON.parse(data.response[1]));
   }
 
   return (<div>
-    {!profile && handlers && <ul>
-      {handlers?.split(',').map((h: any, i: number) => (
-        <li key={i}>
-          <button onClick={() => handleServiceClick(h)}>{h}</button>
-        </li>
-      ))}
-    </ul>}
 
-    {profile && <pre>{JSON.stringify(profile, null, 2)}</pre>
-    }
+    {!signer && <>
+      <ConnectButton />
+    </>}
+
+    {signer && vocdoniClient && <>
+      {!profile && handlers && <ul>
+        {handlers?.split(',').map((h: any, i: number) => (
+          <li key={i}>
+            <button onClick={() => handleServiceClick(h)}>{h}</button>
+          </li>
+        ))}
+      </ul>}
+
+      {profile && <pre>{JSON.stringify(profile, null, 2)}</pre>}
+    </>}
   </div>)
 }
