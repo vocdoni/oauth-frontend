@@ -1,7 +1,4 @@
 import Head from 'next/head'
-import { Inter } from 'next/font/google'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   return (
@@ -14,7 +11,7 @@ export default function Home() {
       </Head>
       <main>
         <div>
-          <iframe src="/vocdoni-widget?electionId=84fc9db5b752e15b00567446ada48f31e9db03ab128ae592269381e200a2065a&handlers=facebook,github" style={{ display: "block", margin: "0 auto", border:'1px solid red', width: '600px', height: '400px' }}></iframe>
+          <iframe src="/vocdoni-widget?electionId=169253a862cb05abb3bf74276ce95f90c4e13c30ceb5e4731beba683f6eb18de&handlers=facebook,github" style={{ display: "block", margin: "0 auto", border:'1px solid red', width: '600px', height: '400px' }}></iframe>
         </div>
       </main>
     </>
