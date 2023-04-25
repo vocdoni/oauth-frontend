@@ -1,39 +1,39 @@
-import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { EnvOptions, VocdoniSDKClient, Vote } from '@vocdoni/sdk';
-import { Signer, Wallet } from 'ethers';
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import { useAccount, useSigner } from 'wagmi';
+import { EnvOptions, VocdoniSDKClient, Vote } from '@vocdoni/sdk';
 
 export default function VocdoniWidget() {
   const router = useRouter();
   const { electionId, handlers, handler, code }: { electionId: string, handlers: string, handler: string, code: string} = router.query as any;
 
-  const { data: signer, isError, isLoading } = useSigner();
-  const { address } = useAccount();
-
   const [profile, setProfile] = useState<any>(null);
+  const [election, setElection] = useState<any>(null);
   const [vocdoniClient, setVocdoniClient] = useState<any>(null);
   const [authToken, setAuthToken] = useState<any>(null);
 
   // Vocdoni Client initialization
   useEffect(() => {
     if(!electionId) return;
-    if(!signer) return;
-
-    setVocdoniClient(initVocdoniClient(signer, electionId));
-  }, [signer, electionId]);
+    setVocdoniClient(initVocdoniClient(electionId)); 
+  }, [electionId]);
 
   // Listening for the popup window meessage
   useEffect(() => {
-    if(window.opener) return;
-    if(!vocdoniClient) return;
+    (async () => {
+      if(window.opener) return;
+      if(!vocdoniClient) return;
 
-    window.addEventListener('message', (event) => {
-      if(event.data.code && event.data.handler){
-        getOAuthToken(vocdoniClient, event.data.code, event.data.handler);
-      }
-    });
+      // TODO: Get the election data
+      const el = await vocdoniClient.fetchElection(electionId);
+      setElection(el);
+
+      // Listen to messages from child window (oauth flows)
+      window.addEventListener('message', (event) => {
+        if(event.data.code && event.data.handler){
+          getOAuthToken(vocdoniClient, event.data.code, event.data.handler);
+        }
+      });
+    })()
   },[vocdoniClient]);
 
   // Posting the message to the main window
@@ -49,13 +49,15 @@ export default function VocdoniWidget() {
     })()
   }, [code, handler]); 
 
-  const initVocdoniClient = (signer: Wallet | Signer, electionId: string) => {
-    return new VocdoniSDKClient({
+  const initVocdoniClient = (electionId: string) => {
+    const client = new VocdoniSDKClient({
       env: EnvOptions.DEV,
-      wallet: signer, // the signer used (Metamask, Walletconnect)
       electionId: electionId, // The election identifier
       csp_url: process.env.NEXT_PUBLIC_CSP_URL // The CSP url defined when creating an election
     });
+    const privateKey = client.generateRandomWallet();
+
+    return client
   }
 
   const handleServiceClick = async (handler: string) => {
@@ -91,7 +93,7 @@ export default function VocdoniWidget() {
     window.open(url, handler, params);
   }
 
-  // Exchange the provided code for the oAuth token
+  // Verify it's in the census
   const getOAuthToken = async (vocdoniClient: any, code: string, handler: string) => {
     if(!code || !handler) return;
 
@@ -103,38 +105,39 @@ export default function VocdoniWidget() {
     try {
       step1 = await vocdoniClient.cspStep(1, [handler, code, redirectURL], authToken);
     } catch(e) {
-      console.log(e);
       alert("Ooops! Looks like you are not in the census!");
+      return false;
     }
     
     setProfile(JSON.parse(step1.response[1]));
 
-    signAndVote(step1.token);   
+    try{
+      signAndVote(step1.token);   
+    }catch(e){
+      alert("Ooops! There was a problem voting!");
+      return false;
+    }
   }
 
   const signAndVote = async (token: string) => {
-    if(!address){
+    if(!vocdoniClient){
       console.error('No address found');
       return;
     }
 
     // Get the blind signature
-    const signature = await vocdoniClient.cspSign(address, token);
+    const signature = await vocdoniClient.cspSign(await vocdoniClient.wallet.getAddress(), token);
 
     // Get the vote based on the signature
-    const vote = vocdoniClient.cspVote(new Vote([1]), signature);
+    const vote = vocdoniClient.cspVote(new Vote([0]), signature);
 
     // Vote
     const voteId = await vocdoniClient.submitVote(vote);
+    console.log('Vote id: ', voteId);
   }
 
   return (<div>
-
-    {!signer && <>
-      <ConnectButton />
-    </>}
-
-    {signer && vocdoniClient && <>
+    {vocdoniClient && <>
       {!profile && handlers && <ul>
         {handlers?.split(',').map((h: any, i: number) => (
           <li key={i}>

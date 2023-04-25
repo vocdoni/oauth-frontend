@@ -11,7 +11,7 @@ export default function Home() {
       </Head>
       <main>
         <div>
-          <iframe src="/vocdoni-widget?electionId=169253a862cb05abb3bf74276ce95f90c4e13c30ceb5e4731beba683f6eb18de&handlers=facebook,github" style={{ display: "block", margin: "0 auto", border:'1px solid red', width: '600px', height: '400px' }}></iframe>
+          <iframe src="/vocdoni-widget?electionId=c5d2460186f769efffbb0094a0b8cd2cdd655cc82b264a625e12030000000000&handlers=facebook,github" style={{ display: "block", margin: "0 auto", border:'1px solid red', width: '600px', height: '400px' }}></iframe>
         </div>
       </main>
     </>
