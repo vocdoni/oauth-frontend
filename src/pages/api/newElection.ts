@@ -25,19 +25,19 @@ export default async function handler(
   });
 
   const question = {
-    title: 'This is a question',
-    description: 'This is a description',
+    title: 'CSP OAuth: La Tia Enriqueta',
+    description: "Vente y vente de bareta, Con la tía enriqueta, Que va per Favareta, Montada en bicicleta, Ni lleva camiseta, Siempre, mírala, mírala",
     options: [
       {
-        title: 'Option 1',
+        title: 'Uno, que no pare ninguno',
+        value: 0
+      },
+      {
+        title: 'Dos, nos movemos los dos',
         value: 1
       },
       {
-        title: 'Option 2',
-        value: 2
-      },
-      {
-        title: 'Option 3',
+        title: 'Tres, lo mismo pero al revés',
         value: 2
       }
     ]
