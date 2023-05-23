@@ -25,7 +25,7 @@ import {
 import { AddIcon, CheckIcon, DeleteIcon, RepeatIcon, SearchIcon } from '@chakra-ui/icons';
 import { Field, Form, Formik } from 'formik';
 
-const Election = () => {
+const Process = () => {
   const { id } = useParams();
   const { vocdoniAdminClient, getAdminToken } = useCspAdmin();
   const navigate = useNavigate();
@@ -81,8 +81,8 @@ const Election = () => {
   };
 
   return (
-    <>
-      <Heading>Election Voters</Heading>
+    <Box rounded={'lg'} bgColor={'white'} boxShadow={'lg'} p={[4, 8]} pt={[4, 6]}>
+      <Heading mb={10}>Election Voters</Heading>
 
       <Flex mt={5} gap={2}>
         <Button>
@@ -113,31 +113,31 @@ const Election = () => {
         </Formik>
       </Flex>
 
-      <Box rounded={'lg'} bg={'light'} boxShadow={'lg'} p={[4, 8]} pt={[4, 6]}>
-        <Table>
-          <Thead>
-            <Tr>
-              <Th>Consumed</Th>
-              <Th>Data</Th>
-              <Th>Handler</Th>
+      <Table>
+        <Thead>
+          <Tr>
+            <Th>Consumed</Th>
+            <Th>Data</Th>
+            {/* <Th>Handler</Th>
               <Th>Service</Th>
-              <Th>Mode</Th>
-              <Th>Actions</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {users.map((e: IUser) => {
-              return (
-                <Tr key={e.userId}>
-                  <Td>{e.consumed ? <CheckIcon color="green.500" /> : ''}</Td>
-                  <Td>{e.data}</Td>
-                  <Td>{e.handler}</Td>
+              <Th>Mode</Th> */}
+            <Th>Actions</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          {users.map((e: IUser) => {
+            return (
+              <Tr key={e.userId}>
+                <Td>{e.consumed ? <CheckIcon color="green.500" /> : ''}</Td>
+                <Td>{e.data}</Td>
+                {/* <Td>{e.handler}</Td>
                   <Td>{e.service}</Td>
-                  <Td>{e.mode}</Td>
-                  <Td>
+                  <Td>{e.mode}</Td> */}
+                <Td>
+                  <Flex justifyContent="flex-end">
                     <Button onClick={toggleConsumed(e.userId as string, e.consumed)} mr={1}>
                       <RepeatIcon boxSize={3} color="blue.500" mr={2} />
-                      Toggle Consumed
+                      {e.consumed ? 'Set as not voted' : 'Set as voted'}
                     </Button>
 
                     <IconButton
@@ -145,15 +145,15 @@ const Election = () => {
                       icon={<DeleteIcon boxSize={3} color="red.500" />}
                       onClick={removeUser(e.userId as string)}
                     />
-                  </Td>
-                </Tr>
-              );
-            })}
-          </Tbody>
-        </Table>
-      </Box>
-    </>
+                  </Flex>
+                </Td>
+              </Tr>
+            );
+          })}
+        </Tbody>
+      </Table>
+    </Box>
   );
 };
 
-export default Election;
+export default Process;

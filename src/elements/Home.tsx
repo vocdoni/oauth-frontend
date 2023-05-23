@@ -4,7 +4,7 @@ import { useCspAdmin } from '../hooks/use-csp';
 import { Field, Form, Formik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 
-const Init = () => {
+const Home = () => {
   const { vocdoniAdminClient, listAdminTokens } = useCspAdmin();
   const navigate = useNavigate();
 
@@ -21,18 +21,18 @@ const Init = () => {
   const validateElectionId = (value: any) => {
     let error;
     if (!value) {
-      error = 'An election is required';
+      error = 'A process is required';
     }
     return error;
   };
 
   const submit = async (values: any, actions: any) => {
-    return navigate(`/${values.electionId}`);
+    return navigate(`/process/${values.electionId}`);
   };
 
   return (
-    <VStack spacing={8}>
-      <Box rounded={'lg'} bg={'light'} boxShadow={'lg'} p={[4, 8]} pt={[4, 6]}>
+    <VStack spacing={8} mt={14}>
+      <Box rounded={'lg'} bgColor={'white'} boxShadow={'lg'} p={[4, 8]} pt={[4, 6]}>
         {adminTokens && adminTokens.length > 0 && (
           <Formik initialValues={{ electionId: '' }} onSubmit={submit}>
             <Form>
@@ -40,7 +40,7 @@ const Init = () => {
                 {({ field, form }: { field: any; form: any }) => (
                   <FormControl isInvalid={form.errors.electionId && form.touched.electionId}>
                     <FormLabel>Select one of your processes</FormLabel>
-                    <Select {...field} placeholder="Select Election">
+                    <Select {...field} placeholder="Select Process">
                       {adminTokens.map((e) => {
                         return (
                           <option key={e.electionId} value={e.electionId}>
@@ -58,37 +58,18 @@ const Init = () => {
                   Go
                 </Button>
               </Flex>
-
-              {/* <FormControl id="init" isRequired>
-                {adminTokens && adminTokens.length > 0 && (
-                  <>
-                    <FormLabel>Select one of your processes</FormLabel>
-                    <Select placeholder="Select Election">
-                      {adminTokens.map((e) => {
-                        return (
-                          <option key={e.electionId} value={e.electionId}>
-                            {e.electionId}
-                          </option>
-                        );
-                      })}
-                    </Select>
-                  </>
-                )}
-              </FormControl> */}
             </Form>
           </Formik>
         )}
 
         {adminTokens && adminTokens.length > 0 && <FormLabel mt={4}>Or create a new one</FormLabel>}
 
-        <a href="/create">
-          <Button width={'full'} type="submit" colorScheme={'blue'}>
-            Create a new Process
-          </Button>
-        </a>
+        <Button width={'full'} type="submit" colorScheme={'blue'} onClick={() => navigate('/process/create')}>
+          Create a new Process
+        </Button>
       </Box>
     </VStack>
   );
 };
 
-export default Init;
+export default Home;

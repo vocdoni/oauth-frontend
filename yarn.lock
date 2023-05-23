@@ -1462,7 +1462,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.11.2, @babel/runtime@npm:^7.12.13, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.16.3, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.20.7, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.9.2":
+"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.11.2, @babel/runtime@npm:^7.12.13, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.16.3, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.20.6, @babel/runtime@npm:^7.20.7, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.9.2":
   version: 7.21.5
   resolution: "@babel/runtime@npm:7.21.5"
   dependencies:
@@ -8479,6 +8479,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"html-parse-stringify@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "html-parse-stringify@npm:3.0.1"
+  dependencies:
+    void-elements: 3.1.0
+  checksum: 334fdebd4b5c355dba8e95284cead6f62bf865a2359da2759b039db58c805646350016d2017875718bc3c4b9bf81a0d11be5ee0cf4774a3a5a7b97cde21cfd67
+  languageName: node
+  linkType: hard
+
 "html-webpack-plugin@npm:^5.5.0":
   version: 5.5.1
   resolution: "html-webpack-plugin@npm:5.5.1"
@@ -10874,6 +10883,7 @@ __metadata:
     prettier: ^2.8.8
     react: ^18.1.0
     react-dom: ^18.1.0
+    react-i18next: ^12.3.1
     react-icons: ^3.0.0
     react-router-dom: ^6.11.2
     react-scripts: 5.0.1
@@ -12499,6 +12509,24 @@ __metadata:
     "@types/react":
       optional: true
   checksum: f4c696bdbde5008560388622b994c00502d1faeeabff32b02964770c8c020208872f5f6b914b249a8bf3e97cc12e58bb0d227cd33460093654156b7b7f4c8d76
+  languageName: node
+  linkType: hard
+
+"react-i18next@npm:^12.3.1":
+  version: 12.3.1
+  resolution: "react-i18next@npm:12.3.1"
+  dependencies:
+    "@babel/runtime": ^7.20.6
+    html-parse-stringify: ^3.0.1
+  peerDependencies:
+    i18next: ">= 19.0.0"
+    react: ">= 16.8.0"
+  peerDependenciesMeta:
+    react-dom:
+      optional: true
+    react-native:
+      optional: true
+  checksum: fe3f360e5184bc63861734e94bf625a09b9ec0d28fab41779a68758af258fd1737dde25ff7a88ddb66c1571a3e3de5b3403825a91b4949bf9832a00615acb87a
   languageName: node
   linkType: hard
 
@@ -14570,6 +14598,13 @@ __metadata:
     blakejs: ^1.2.1
   languageName: node
   linkType: soft
+
+"void-elements@npm:3.1.0":
+  version: 3.1.0
+  resolution: "void-elements@npm:3.1.0"
+  checksum: 0390f818107fa8fce55bb0a5c3f661056001c1d5a2a48c28d582d4d847347c2ab5b7f8272314cac58acf62345126b6b09bea623a185935f6b1c3bbce0dfd7f7f
+  languageName: node
+  linkType: hard
 
 "w3c-hr-time@npm:^1.0.2":
   version: 1.0.2

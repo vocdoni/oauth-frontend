@@ -1,10 +1,10 @@
-import { Button, FormControl, FormErrorMessage, FormLabel, Input, Textarea } from '@chakra-ui/react';
+import { Box, Button, FormControl, FormErrorMessage, FormLabel, Heading, Input, Textarea } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
 import { useCspAdmin } from '../hooks/use-csp';
 import { useState } from 'react';
 import { IElection, IElectionCreated } from 'vocdoni-admin-sdk';
 
-const ElectionCreate = () => {
+const ProcessCreate = () => {
   const { vocdoniAdminClient, saveAdminToken } = useCspAdmin();
 
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -63,33 +63,36 @@ const ElectionCreate = () => {
   };
 
   return (
-    <Formik initialValues={{ electionId: '' }} onSubmit={submit}>
-      <Form>
-        <Field name="electionId" validate={validateElectionId}>
-          {({ field, form }: { field: any; form: any }) => (
-            <FormControl isInvalid={form.errors.electionId && form.touched.electionId}>
-              <FormLabel>Election Id</FormLabel>
-              <Input {...field} />
-              <FormErrorMessage>{form.errors.electionId}</FormErrorMessage>
-            </FormControl>
-          )}
-        </Field>
+    <Box rounded={'lg'} bgColor={'white'} boxShadow={'lg'} p={[4, 8]} pt={[4, 6]}>
+      <Heading mb={10}>Create Process</Heading>
+      <Formik initialValues={{ electionId: '' }} onSubmit={submit}>
+        <Form>
+          <Field name="electionId" validate={validateElectionId}>
+            {({ field, form }: { field: any; form: any }) => (
+              <FormControl isInvalid={form.errors.electionId && form.touched.electionId}>
+                <FormLabel>Election Id</FormLabel>
+                <Input {...field} />
+                <FormErrorMessage>{form.errors.electionId}</FormErrorMessage>
+              </FormControl>
+            )}
+          </Field>
 
-        <Field name="handlers" validate={validateHandlers}>
-          {({ field, form }: { field: any; form: any }) => (
-            <FormControl isInvalid={form.errors.handlers && form.touched.handlers}>
-              <FormLabel>Handlers</FormLabel>
-              <Textarea {...field} />
-              <FormErrorMessage>{form.errors.handlers}</FormErrorMessage>
-            </FormControl>
-          )}
-        </Field>
-        <Button mt={4} colorScheme="teal" isLoading={isSubmitting} type="submit">
-          Submit
-        </Button>
-      </Form>
-    </Formik>
+          <Field name="handlers" validate={validateHandlers}>
+            {({ field, form }: { field: any; form: any }) => (
+              <FormControl isInvalid={form.errors.handlers && form.touched.handlers}>
+                <FormLabel>Handlers</FormLabel>
+                <Textarea {...field} />
+                <FormErrorMessage>{form.errors.handlers}</FormErrorMessage>
+              </FormControl>
+            )}
+          </Field>
+          <Button mt={4} colorScheme="teal" isLoading={isSubmitting} type="submit">
+            Submit
+          </Button>
+        </Form>
+      </Formik>
+    </Box>
   );
 };
 
-export default ElectionCreate;
+export default ProcessCreate;
