@@ -8,12 +8,18 @@ import {
   Flex,
   FormControl,
   FormErrorMessage,
-  FormLabel,
   Heading,
   IconButton,
   Input,
   InputGroup,
   InputRightElement,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   Spacer,
   Table,
   Tbody,
@@ -21,19 +27,22 @@ import {
   Th,
   Thead,
   Tr,
+  useDisclosure,
 } from '@chakra-ui/react';
 import { AddIcon, CheckIcon, CloseIcon, DeleteIcon, RepeatIcon, SearchIcon } from '@chakra-ui/icons';
 import { Field, Form, Formik } from 'formik';
+import GithubUserSearch from '../components/GithubUserSearch';
 
 const Process = () => {
   const { id } = useParams();
   const { vocdoniAdminClient, getAdminToken } = useCspAdmin();
   const navigate = useNavigate();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [adminToken, setAdminToken] = useState<string>('');
-  const [election, setElection] = useState<IElection>();
   const [users, setUsers] = useState<IUser[]>([]);
   const [isSearchFilter, setIsSearchFilter] = useState<boolean>(false);
+  const [showGithubUserSearch, setShowGithubUserSearch] = useState<boolean>(false);
 
   useEffect(() => {
     (async function iife() {
@@ -84,15 +93,54 @@ const Process = () => {
     setIsSearchFilter(false);
   };
 
+  const updatedGithubSelection = async (users: any) => {
+    if (!vocdoniAdminClient || !adminToken) return;
+
+    await Promise.all(
+      users.map(async (user: any) => {
+        try {
+          await vocdoniAdminClient.cspUserCreate(adminToken, id, {
+            handler: 'oauth',
+            service: 'github',
+            mode: 'usernames',
+            data: user.login,
+            consumed: false,
+          });
+        } catch (e) {
+          console.log(e);
+        }
+      })
+    );
+
+    refreshUsers();
+  };
+
   return (
     <Box rounded={'lg'} bgColor={'white'} boxShadow={'lg'} p={[4, 8]} pt={[4, 6]}>
       <Heading mb={10}>Process Voters</Heading>
 
       <Flex mt={5} gap={2}>
-        <Button>
+        <Button onClick={onOpen}>
           <AddIcon boxSize={3} color="blue.500" mr={2} />
-          Add User
+          Add Users
         </Button>
+
+        <Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Select Gitub users</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <GithubUserSearch onUpdateSelection={updatedGithubSelection} />
+            </ModalBody>
+
+            <ModalFooter>
+              <Button colorScheme="blue" mr={3} onClick={onClose}>
+                Done
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
 
         <Spacer />
 
