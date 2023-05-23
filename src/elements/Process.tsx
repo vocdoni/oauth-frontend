@@ -22,7 +22,7 @@ import {
   Thead,
   Tr,
 } from '@chakra-ui/react';
-import { AddIcon, CheckIcon, DeleteIcon, RepeatIcon, SearchIcon } from '@chakra-ui/icons';
+import { AddIcon, CheckIcon, CloseIcon, DeleteIcon, RepeatIcon, SearchIcon } from '@chakra-ui/icons';
 import { Field, Form, Formik } from 'formik';
 
 const Process = () => {
@@ -33,7 +33,7 @@ const Process = () => {
   const [adminToken, setAdminToken] = useState<string>('');
   const [election, setElection] = useState<IElection>();
   const [users, setUsers] = useState<IUser[]>([]);
-  const [isSearching, setIsSearching] = useState<boolean>(false);
+  const [isSearchFilter, setIsSearchFilter] = useState<boolean>(false);
 
   useEffect(() => {
     (async function iife() {
@@ -50,7 +50,7 @@ const Process = () => {
   const refreshUsers = async () => {
     if (!adminToken) return;
 
-    setUsers(await vocdoniAdminClient.cspUserList(adminToken, id));
+    setUsers((await vocdoniAdminClient.cspUserList(adminToken, id)) || []);
   };
 
   const removeUser = (userId: string) => async () => {
@@ -72,17 +72,21 @@ const Process = () => {
   const handleSearch = async (values: any, actions: any) => {
     if (!vocdoniAdminClient || !adminToken) return;
 
-    setIsSearching(true);
+    setIsSearchFilter(true);
     let search: IUser[] = await vocdoniAdminClient.cspUserSearch(adminToken, id, {
       data: values.search,
     });
-    setUsers(search);
-    setIsSearching(false);
+    setUsers(search || []);
+  };
+
+  const resetSearch = async () => {
+    refreshUsers();
+    setIsSearchFilter(false);
   };
 
   return (
     <Box rounded={'lg'} bgColor={'white'} boxShadow={'lg'} p={[4, 8]} pt={[4, 6]}>
-      <Heading mb={10}>Election Voters</Heading>
+      <Heading mb={10}>Process Voters</Heading>
 
       <Flex mt={5} gap={2}>
         <Button>
@@ -100,9 +104,24 @@ const Process = () => {
                   <InputGroup size="md">
                     <Input {...field} pr="4.5rem" />
                     <InputRightElement mr={1}>
-                      <Button h="1.75rem" size="sm" onClick={form.handleSubmit} colorScheme={'teal'}>
-                        <SearchIcon boxSize={3} color="white" />
-                      </Button>
+                      {!isSearchFilter && (
+                        <Button h="1.75rem" size="sm" onClick={form.handleSubmit} colorScheme={'teal'}>
+                          <SearchIcon boxSize={3} color="white" />
+                        </Button>
+                      )}
+                      {isSearchFilter && (
+                        <Button
+                          h="1.75rem"
+                          size="sm"
+                          onClick={() => {
+                            form.resetForm();
+                            resetSearch();
+                          }}
+                          colorScheme={'teal'}
+                        >
+                          <CloseIcon boxSize={3} color="white" />
+                        </Button>
+                      )}
                     </InputRightElement>
                   </InputGroup>
                   <FormErrorMessage>{form.errors.search}</FormErrorMessage>
@@ -113,7 +132,7 @@ const Process = () => {
         </Formik>
       </Flex>
 
-      <Table>
+      <Table mt={2}>
         <Thead>
           <Tr>
             <Th>Consumed</Th>
