@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { IElection, IElectionCreated } from 'vocdoni-admin-sdk';
 import GithubUserSearch from '../components/GithubUserSearch';
 import { useNavigate } from 'react-router-dom';
+import UserCard from '../components/UserCard';
 
 const ProcessCreate = () => {
   const { vocdoniAdminClient, saveAdminToken } = useCspAdmin();
@@ -83,7 +84,7 @@ const ProcessCreate = () => {
           </Field>
 
           <FormLabel mt={8}>Select Github users</FormLabel>
-          <GithubUserSearch onUpdateSelection={updatedGithubSelection} />
+          <GithubUserSearch onUpdateSelection={updatedGithubSelection} showSelectedList={true} />
 
           <Button mt={4} colorScheme="teal" isLoading={isSubmitting} type="submit">
             Create

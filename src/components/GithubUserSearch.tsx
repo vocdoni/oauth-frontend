@@ -1,18 +1,6 @@
-import { ExternalLinkIcon } from '@chakra-ui/icons';
-import {
-  Avatar,
-  Box,
-  Card,
-  CardHeader,
-  Flex,
-  Heading,
-  IconButton,
-  Input,
-  List,
-  ListItem,
-  useToast,
-} from '@chakra-ui/react';
+import { Flex, FormLabel, Input, List, ListItem, useToast } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
+import UserCard from './UserCard';
 
 const GithubUserSearch = ({ ...props }) => {
   const toast = useToast();
@@ -27,7 +15,7 @@ const GithubUserSearch = ({ ...props }) => {
       clearTimeout(searchTimeout);
     }
 
-    setSearchTimeout(setTimeout(searchUsername, 500));
+    setSearchTimeout(setTimeout(searchUsername, 100));
   }, [searchQuery]);
 
   useEffect(() => {
@@ -41,6 +29,7 @@ const GithubUserSearch = ({ ...props }) => {
   };
 
   const searchUsername = async () => {
+    setUserList([]);
     if (!searchQuery) return;
 
     try {
@@ -66,6 +55,10 @@ const GithubUserSearch = ({ ...props }) => {
     }
   };
 
+  const handleRemove = (user: any) => {
+    setClickedUsers((prevClickedUsers) => prevClickedUsers.filter((u) => u.id !== user.id));
+  };
+
   return (
     <>
       <Input type="text" placeholder="Search..." onChange={(e) => handleInputChange(e.target.value)} />
@@ -74,31 +67,30 @@ const GithubUserSearch = ({ ...props }) => {
         <List spacing={2} maxH={500} overflow={'scroll'}>
           {userList.map((user) => (
             <ListItem key={user.id} style={{ listStyleType: 'none' }}>
-              <Card
-                onClick={() => handleUserClick(user)}
-                style={{
-                  cursor: 'pointer',
-                }}
-                bgColor={clickedUsers.includes(user) ? 'teal.100' : 'transparent'}
-              >
-                <CardHeader>
-                  <Flex>
-                    <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap">
-                      <Avatar name={user.login} src={user.avatar_url} />
-
-                      <Box>
-                        <Heading size="sm">{user.login}</Heading>
-                      </Box>
-                    </Flex>
-                    <a href={user.html_url} target="_blank" rel="noopener noreferrer">
-                      <IconButton variant="ghost" colorScheme="gray" aria-label="Profile" icon={<ExternalLinkIcon />} />
-                    </a>
-                  </Flex>
-                </CardHeader>
-              </Card>
+              <UserCard
+                size="sm"
+                user={user}
+                onClick={handleUserClick}
+                clickedBgColor={clickedUsers.includes(user) ? 'teal.100' : 'transparent'}
+              />
             </ListItem>
           ))}
         </List>
+      )}
+
+      {props.showSelectedList && clickedUsers.length > 0 && (
+        <>
+          <FormLabel mt={8}>Selected Github users</FormLabel>
+          <List>
+            <Flex>
+              {clickedUsers.map((user) => (
+                <ListItem key={user.id} mr={2}>
+                  <UserCard user={user} size={'xs'} onRemove={handleRemove} externalLink={false} />
+                </ListItem>
+              ))}
+            </Flex>
+          </List>
+        </>
       )}
     </>
   );
