@@ -28,21 +28,26 @@ import {
   Thead,
   Tr,
   useDisclosure,
+  useToast,
 } from '@chakra-ui/react';
 import { AddIcon, CheckIcon, CloseIcon, DeleteIcon, RepeatIcon, SearchIcon } from '@chakra-ui/icons';
 import { Field, Form, Formik } from 'formik';
 import GithubUserSearch from '../components/GithubUserSearch';
+import { useClient } from '@vocdoni/chakra-components';
+import { PublishedElection } from '@vocdoni/sdk';
 
 const Process = () => {
   const { id } = useParams();
   const { vocdoniAdminClient, getAdminToken } = useCspAdmin();
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { client } = useClient();
+  const toast = useToast();
 
   const [adminToken, setAdminToken] = useState<string>('');
+  const [election, setElection] = useState<PublishedElection>();
   const [users, setUsers] = useState<IUser[]>([]);
   const [isSearchFilter, setIsSearchFilter] = useState<boolean>(false);
-  const [showGithubUserSearch, setShowGithubUserSearch] = useState<boolean>(false);
 
   useEffect(() => {
     (async function iife() {
@@ -50,6 +55,20 @@ const Process = () => {
 
       const adminToken = await getAdminToken(id);
       if (!adminToken) navigate('/');
+
+      if (!election) {
+        try {
+          setElection(await client.fetchElection(id));
+        } catch (e) {
+          toast({
+            title: 'Error fetching election',
+            status: 'error',
+            duration: 5000,
+            isClosable: true,
+          });
+          navigate('/');
+        }
+      }
 
       setAdminToken(adminToken);
       refreshUsers();
@@ -117,7 +136,14 @@ const Process = () => {
 
   return (
     <Box rounded={'lg'} bgColor={'white'} boxShadow={'lg'} p={[4, 8]} pt={[4, 6]}>
-      <Heading mb={10}>Process Voters</Heading>
+      {election && (
+        <>
+          <Heading mb={5}>{election?.title.default}</Heading>
+          <Box mb={7}>
+            <p>{election?.description.default}</p>
+          </Box>
+        </>
+      )}
 
       <Flex mt={5} gap={2}>
         <Button onClick={onOpen}>

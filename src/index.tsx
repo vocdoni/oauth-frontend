@@ -6,17 +6,25 @@ import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
 import theme from './theme';
 import { CspAdminProvider } from './hooks/use-csp';
+import { EnvOptions } from '@vocdoni/sdk';
+import { ClientProvider } from '@vocdoni/chakra-components';
 
 const container = document.getElementById('root');
 if (!container) throw new Error('Failed to find the root element');
 const root = ReactDOM.createRoot(container);
+
+// we could rewrite webpack configuration, but this is waaay easier...
+// fixes "buffer is not defined" errors from rainbowkit (and any other dependency)
+(window as any).Buffer = (window as any).Buffer || require('buffer').Buffer;
 
 root.render(
   <React.StrictMode>
     <ColorModeScript />
     <ChakraProvider theme={theme}>
       <CspAdminProvider>
-        <App />
+        <ClientProvider env={EnvOptions.DEV} language={'en'}>
+          <App />
+        </ClientProvider>
       </CspAdminProvider>
     </ChakraProvider>
   </React.StrictMode>

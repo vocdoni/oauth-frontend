@@ -1,25 +1,50 @@
-import { Box, Button, FormControl, FormErrorMessage, FormLabel, Heading, Input, useToast } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Collapse,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Heading,
+  Input,
+  useToast,
+} from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
 import { useCspAdmin } from '../hooks/use-csp';
 import { useState } from 'react';
 import { IElection, IElectionCreated } from 'vocdoni-admin-sdk';
 import GithubUserSearch from '../components/GithubUserSearch';
 import { useNavigate } from 'react-router-dom';
-import UserCard from '../components/UserCard';
+import { useClient } from '@vocdoni/chakra-components';
+import { PublishedElection } from '@vocdoni/sdk';
 
 const ProcessCreate = () => {
   const { vocdoniAdminClient, saveAdminToken } = useCspAdmin();
   const toast = useToast();
   const navigate = useNavigate();
+  const { client } = useClient();
 
   const [selectedUsers, setSelectedUsers] = useState<any[]>([]);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [election, setElection] = useState<PublishedElection | null>();
 
-  const validateElectionId = (value: any) => {
+  const validateElectionId = async (value: any) => {
     let error;
     if (!value) {
       error = 'ElectionId is required';
     }
+
+    if (value.length == 64) {
+      try {
+        setElection(await client.fetchElection(value));
+      } catch (err) {
+        error = 'Election not found';
+      }
+    } else {
+      error = 'ElectionId should be a 64 characters string';
+    }
+
+    if (error) setElection(null);
     return error;
   };
 
@@ -59,7 +84,6 @@ const ProcessCreate = () => {
       console.error(err);
       toast({
         title: 'Error creating process',
-        // description: `Error creating process: ${err?.message}`,
         status: 'error',
         duration: 5000,
         isClosable: true,
@@ -83,8 +107,10 @@ const ProcessCreate = () => {
             )}
           </Field>
 
-          <FormLabel mt={8}>Select Github users</FormLabel>
-          <GithubUserSearch onUpdateSelection={updatedGithubSelection} showSelectedList={true} />
+          <Collapse in={election ? true : false} animateOpacity>
+            <FormLabel mt={8}>Select Github users</FormLabel>
+            <GithubUserSearch onUpdateSelection={updatedGithubSelection} showSelectedList={true} />
+          </Collapse>
 
           <Button mt={4} colorScheme="teal" isLoading={isSubmitting} type="submit">
             Create

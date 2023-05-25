@@ -63,7 +63,7 @@ const GithubUserSearch = ({ ...props }) => {
     <>
       <Input type="text" placeholder="Search..." onChange={(e) => handleInputChange(e.target.value)} />
 
-      {userList.length > 0 && (
+      {userList && userList.length > 0 && (
         <List spacing={2} maxH={500} overflow={'scroll'}>
           {userList.map((user) => (
             <ListItem key={user.id} style={{ listStyleType: 'none' }}>
