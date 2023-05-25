@@ -72,7 +72,7 @@ const ProcessCreate = () => {
     try {
       const res: IElectionCreated = await vocdoniAdminClient.cspElectionCreate(cspElection);
       saveAdminToken(values.electionId, res.adminToken);
-      saveElection(values.electionId, election);
+      saveElection(election);
 
       toast({
         title: 'Process created',

@@ -16,7 +16,7 @@ const Home = () => {
       if (!vocdoniAdminClient) return;
 
       let electionsList: PublishedElection[] = [];
-      let rawElectionsList = await listElections();
+      let rawElectionsList = (await listElections()) || [];
       for (let e of rawElectionsList) {
         electionsList.push(
           new PublishedElection({
