@@ -3,18 +3,48 @@ import { useEffect, useState } from 'react';
 import { useCspAdmin } from '../hooks/use-csp';
 import { Field, Form, Formik } from 'formik';
 import { useNavigate } from 'react-router-dom';
+import { PublishedElection } from '@vocdoni/sdk';
 
 const Home = () => {
-  const { vocdoniAdminClient, listAdminTokens } = useCspAdmin();
+  const { vocdoniAdminClient, listElections } = useCspAdmin();
   const navigate = useNavigate();
 
-  const [adminTokens, setAdminTokens] = useState<any[]>([]);
+  const [elections, setElections] = useState<PublishedElection[]>([]);
 
   useEffect(() => {
     (async function iife() {
       if (!vocdoniAdminClient) return;
 
-      setAdminTokens(await listAdminTokens());
+      let electionsList: PublishedElection[] = [];
+      let rawElectionsList = await listElections();
+      for (let e of rawElectionsList) {
+        electionsList.push(
+          new PublishedElection({
+            id: e._id,
+            title: e._title,
+            description: e._description,
+            header: e._header,
+            streamUri: e._streamUri,
+            startDate: e._startDate,
+            endDate: e._endDate,
+            census: e._census,
+            voteType: e._voteType,
+            electionType: e._electionType,
+            questions: e._questions,
+            maxCensusSize: e._maxCensusSize,
+            organizationId: e._organizationId,
+            status: e._status,
+            voteCount: e._voteCount,
+            finalResults: e._finalResults,
+            results: e._results,
+            electionCount: e._electionCount,
+            creationTime: e._creationTime,
+            metadataURL: e._metadataURL,
+            raw: e._raw,
+          })
+        );
+      }
+      setElections(electionsList);
     })();
   }, [vocdoniAdminClient]);
 
@@ -33,22 +63,24 @@ const Home = () => {
   return (
     <VStack spacing={8} mt={14}>
       <Box rounded={'lg'} bgColor={'white'} boxShadow={'lg'} p={[4, 8]} pt={[4, 6]}>
-        {adminTokens && adminTokens.length > 0 && (
+        {elections && elections.length > 0 && (
           <Formik initialValues={{ electionId: '' }} onSubmit={submit}>
             <Form>
               <Field name="electionId" validate={validateElectionId}>
                 {({ field, form }: { field: any; form: any }) => (
                   <FormControl isInvalid={form.errors.electionId && form.touched.electionId}>
                     <FormLabel>Select one of your processes</FormLabel>
-                    <Select {...field} placeholder="Select Process">
-                      {adminTokens.map((e) => {
-                        return (
-                          <option key={e.electionId} value={e.electionId}>
-                            {e.electionId}
-                          </option>
-                        );
-                      })}
-                    </Select>
+                    {elections && elections.length > 0 && (
+                      <Select {...field} placeholder="Select Process">
+                        {elections.map((e: PublishedElection) => {
+                          return (
+                            <option key={e.id} value={e.id}>
+                              {e.title.default}
+                            </option>
+                          );
+                        })}
+                      </Select>
+                    )}
                     <FormErrorMessage>{form.errors.electionId}</FormErrorMessage>
                   </FormControl>
                 )}
@@ -62,7 +94,7 @@ const Home = () => {
           </Formik>
         )}
 
-        {adminTokens && adminTokens.length > 0 && <FormLabel mt={4}>Or create a new one</FormLabel>}
+        {elections && elections.length > 0 && <FormLabel mt={4}>Or create a new one</FormLabel>}
 
         <Button width={'full'} type="submit" colorScheme={'blue'} onClick={() => navigate('/process/create')}>
           Create a new Process

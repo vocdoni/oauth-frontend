@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useCspAdmin } from '../hooks/use-csp';
 import { useEffect, useState } from 'react';
-import { IElection, IUser } from 'vocdoni-admin-sdk';
+import { IUser } from 'vocdoni-admin-sdk';
 import {
   Box,
   Button,

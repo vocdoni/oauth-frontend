@@ -19,7 +19,7 @@ import { useClient } from '@vocdoni/chakra-components';
 import { PublishedElection } from '@vocdoni/sdk';
 
 const ProcessCreate = () => {
-  const { vocdoniAdminClient, saveAdminToken } = useCspAdmin();
+  const { vocdoniAdminClient, saveAdminToken, saveElection } = useCspAdmin();
   const toast = useToast();
   const navigate = useNavigate();
   const { client } = useClient();
@@ -57,7 +57,7 @@ const ProcessCreate = () => {
 
     setIsSubmitting(true);
 
-    const election: IElection = {
+    const cspElection: IElection = {
       electionId: values.electionId,
       handlers: [
         {
@@ -70,8 +70,10 @@ const ProcessCreate = () => {
     };
 
     try {
-      const res: IElectionCreated = await vocdoniAdminClient.cspElectionCreate(election);
+      const res: IElectionCreated = await vocdoniAdminClient.cspElectionCreate(cspElection);
       saveAdminToken(values.electionId, res.adminToken);
+      saveElection(values.electionId, election);
+
       toast({
         title: 'Process created',
         description: `Process created successfully`,

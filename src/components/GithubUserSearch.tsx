@@ -15,7 +15,7 @@ const GithubUserSearch = ({ ...props }) => {
       clearTimeout(searchTimeout);
     }
 
-    setSearchTimeout(setTimeout(searchUsername, 100));
+    setSearchTimeout(setTimeout(searchUsername, 500));
   }, [searchQuery]);
 
   useEffect(() => {
