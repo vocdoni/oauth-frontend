@@ -1,0 +1,102 @@
+{
+  "cc": {
+    "actions": {
+      "cancel": "Cancel the process immediately, not allowing new votes and not counting any results (caution: it cannot be reverted)",
+      "cancel_description": "cancelling the \"{{ election.title.default }}\" election process",
+      "continue": "Resume the process immediately, in case it has been paused",
+      "end": "End the process immediately, preventing new votes to be submitted, and shows the voting results (caution: it cannot be reverted)",
+      "end_description": "ending the \"{{ election.title.default }}\" election process",
+      "error_title": "There was some error while executing the transaction",
+      "pause": "Pause the voting process temporarily, until resumed manually. While the process is paused, voters cannot submit votes.",
+      "pause_description": "pausing the \"{{ election.title.default }}\" election process",
+      "waiting_title": "Waiting for transaction confirmation..."
+    },
+    "empty": "Apparently this process has no questions 🤔",
+    "required": "This field is required",
+    "results": {
+      "date_format": "d-L-y HH:mm",
+      "secret_until_the_end": "Secret until the end. The results will be available when the process ends at {{ endDate }}",
+      "title": "Results for \"{{ title }}\"",
+      "votes": "Votes: {{ votes }} ({{ percent }})"
+    },
+    "statuses": {
+      "CANCELED": "Canceled",
+      "ENDED": "Ended",
+      "ONGOING": "Ongoing",
+      "PAUSED": "Paused",
+      "PROCESS_UNKNOWN": "Unknown",
+      "RESULTS": "Results",
+      "UPCOMING": "Upcoming"
+    },
+    "vote": {
+      "button": "Vote",
+      "button_update": "Re-submit vote",
+      "missing_answers": "You have to answer all the questions",
+      "voted_description": "Your vote id is {{ id }}. You can use it to verify your vote.",
+      "voted_title": "Your vote was successfully cast!"
+    }
+  },
+  "create_a_new_process": "",
+  "footer": {
+    "about": "About",
+    "blog": "Blog",
+    "company": "company",
+    "contact": "Contact",
+    "developer_portal": "Developers Portal",
+    "developers": "developers",
+    "guides": "Guides",
+    "how_we_work": "How we work",
+    "resources": "resources",
+    "tutorials": "Tutorials",
+    "vocdoni_api": "Vocdoni API",
+    "vocdoni_app": "Vocdoni APP"
+  },
+  "form": {
+    "error": {
+      "address_pattern": "Only hex addresses are allowed",
+      "field_is_required": "This field is required"
+    },
+    "process_create": {
+      "address_title": "Address {{ num }}",
+      "address_weight": "Weight",
+      "addresses_title": "Addresses",
+      "advanced_settings": "Advanced settings",
+      "autostart": "Autostart",
+      "date_end": "End date:",
+      "date_start": "Start date:",
+      "interruptible": "Interruptible",
+      "max_vote_overwrites": "Max. overwrites per vote",
+      "process_description": "Description",
+      "process_description_placeholder": "A thoroughly detailed description",
+      "process_title": "Title",
+      "process_title_placeholder": "The main process title",
+      "question_delete": "Delete question {{ num }}",
+      "question_identifier": "Question {{ num }}",
+      "question_placeholder": "Question {{ num }} title",
+      "question_title": "Title",
+      "questions_title": "Questions",
+      "secret_until_the_end": "Secret until the end",
+      "settings": "Election settings",
+      "submit": "Create process",
+      "success_description": "Redirecting you to the election process page...",
+      "success_title": "Election process successfully created",
+      "weighted_vote": "Weighted vote"
+    }
+  },
+  "home": {
+    "go": "",
+    "select_one_of_your_processes": "",
+    "select_process": ""
+  },
+  "link": {
+    "discord": "Link to Vocdoni's discord",
+    "github": "Link to Vocdoni's github",
+    "twitter": "Link to Vocdoni's twitter"
+  },
+  "loading": "Loading...",
+  "logout": "Logout",
+  "menu": {
+    "connect": "Connect"
+  },
+  "or_create_a_new_one": ""
+}

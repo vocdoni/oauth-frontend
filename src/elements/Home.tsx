@@ -1,22 +1,24 @@
-import { Box, Button, Flex, FormControl, FormErrorMessage, FormLabel, Select, VStack } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
-import { useCspAdmin } from '../hooks/use-csp';
-import { Field, Form, Formik } from 'formik';
-import { useNavigate } from 'react-router-dom';
-import { PublishedElection } from '@vocdoni/sdk';
+import { Box, Button, Flex, FormControl, FormErrorMessage, FormLabel, Select, VStack } from '@chakra-ui/react'
+import { useEffect, useState } from 'react'
+import { useCspAdmin } from '../hooks/use-csp'
+import { Field, Form, Formik } from 'formik'
+import { useNavigate } from 'react-router-dom'
+import { PublishedElection } from '@vocdoni/sdk'
+import { useTranslation } from 'react-i18next'
 
 const Home = () => {
-  const { vocdoniAdminClient, listElections } = useCspAdmin();
-  const navigate = useNavigate();
+  const { vocdoniAdminClient, listElections } = useCspAdmin()
+  const navigate = useNavigate()
+  const { t } = useTranslation()
 
-  const [elections, setElections] = useState<PublishedElection[]>([]);
+  const [elections, setElections] = useState<PublishedElection[]>([])
 
   useEffect(() => {
-    (async function iife() {
-      if (!vocdoniAdminClient) return;
+    ;(async function iife() {
+      if (!vocdoniAdminClient) return
 
-      let electionsList: PublishedElection[] = [];
-      let rawElectionsList = (await listElections()) || [];
+      let electionsList: PublishedElection[] = []
+      let rawElectionsList = (await listElections()) || []
       for (let e of rawElectionsList) {
         electionsList.push(
           new PublishedElection({
@@ -42,23 +44,23 @@ const Home = () => {
             metadataURL: e._metadataURL,
             raw: e._raw,
           })
-        );
+        )
       }
-      setElections(electionsList);
-    })();
-  }, [vocdoniAdminClient]);
+      setElections(electionsList)
+    })()
+  }, [vocdoniAdminClient])
 
   const validateElectionId = (value: any) => {
-    let error;
+    let error
     if (!value) {
-      error = 'A process is required';
+      error = 'A process is required'
     }
-    return error;
-  };
+    return error
+  }
 
   const submit = async (values: any, actions: any) => {
-    return navigate(`/process/${values.electionId}`);
-  };
+    return navigate(`/process/${values.electionId}`)
+  }
 
   return (
     <VStack spacing={8} mt={14}>
@@ -66,18 +68,18 @@ const Home = () => {
         {elections && elections.length > 0 && (
           <Formik initialValues={{ electionId: '' }} onSubmit={submit}>
             <Form>
-              <Field name="electionId" validate={validateElectionId}>
+              <Field name='electionId' validate={validateElectionId}>
                 {({ field, form }: { field: any; form: any }) => (
                   <FormControl isInvalid={form.errors.electionId && form.touched.electionId}>
-                    <FormLabel>Select one of your processes</FormLabel>
+                    <FormLabel>{t('home.select_one_of_your_processes')}</FormLabel>
                     {elections && elections.length > 0 && (
-                      <Select {...field} placeholder="Select Process">
+                      <Select {...field} placeholder={t('home.select_process')}>
                         {elections.map((e: PublishedElection) => {
                           return (
                             <option key={e.id} value={e.id}>
                               {e.title.default}
                             </option>
-                          );
+                          )
                         })}
                       </Select>
                     )}
@@ -86,22 +88,22 @@ const Home = () => {
                 )}
               </Field>
               <Flex mt={2} justify={'flex-end'}>
-                <Button type="submit" colorScheme={'blue'}>
-                  Go
+                <Button type='submit' colorScheme={'blue'}>
+                  {t('home.go')}
                 </Button>
               </Flex>
             </Form>
           </Formik>
         )}
 
-        {elections && elections.length > 0 && <FormLabel mt={4}>Or create a new one</FormLabel>}
+        {elections && elections.length > 0 && <FormLabel mt={4}>{t('or_create_a_new_one')}</FormLabel>}
 
-        <Button width={'full'} type="submit" colorScheme={'blue'} onClick={() => navigate('/process/create')}>
-          Create a new Process
+        <Button width={'full'} type='submit' colorScheme={'blue'} onClick={() => navigate('/process/create')}>
+          {t('create_a_new_process')}
         </Button>
       </Box>
     </VStack>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

@@ -1,3 +1,3 @@
-import { RoutesProvider } from './router/Router';
+import { RoutesProvider } from './router/Router'
 
-export const App = () => <RoutesProvider />;
+export const App = () => <RoutesProvider />

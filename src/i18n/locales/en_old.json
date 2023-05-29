@@ -1,0 +1,79 @@
+{
+  "alt_image": "{{ img }} image",
+  "aside": {
+    "connect_and_vote": "Connect and vote on your favorite proposals",
+    "connect_to_vote": "Connect to vote",
+    "connect_your_wallet": "Connect your wallet to view the status of the proposal...",
+    "has_already_voted": "You have already voted",
+    "is_able_to_vote": "Connected. You are elegible for voting",
+    "is_not_in_census": "You are not in census",
+    "overwrite_votes_left": "You can correct your vote up to {{ left }} times.",
+    "proposers": "Proposers",
+    "verify_vote_on_explorer": "Verify vote on explorer",
+    "voters": "Voters"
+  },
+  "copy": {
+    "address": "Copy address",
+    "copied_title": "Copied!"
+  },
+  "home": {
+    "active_voting": "Active voting",
+    "more_active_organizations": "More active organizations"
+  },
+  "menu": {
+    "create_process": "Create process",
+    "my_list": "My list",
+    "open_menu": "Open menu"
+  },
+  "open_in_explorer": "Open in explorer",
+  "organization": {
+    "avatar_alt": "Avatar image of {{ name }} organization",
+    "dao_title": "DAO",
+    "elections": "Elections",
+    "elections_list_empty": "This organization has no elections yet",
+    "members": "Members",
+    "rounds": {
+      "active": "Active",
+      "all": "All rounds"
+    }
+  },
+  "process": {
+    "date": {
+      "canceled": "Process canceled",
+      "ended": "Process ended",
+      "ends": "Process ends",
+      "relative": "{{ date, relative(past: %time ago; future: in %time) }}",
+      "starts": "Process starts"
+    },
+    "questions": "Questions",
+    "results": "Results",
+    "status": {
+      "canceled": "Process canceled",
+      "ended": "Process ended",
+      "ongoing": "Process ongoing",
+      "paused": "Process paused",
+      "results": "Results",
+      "unknown": "Unknown",
+      "upcoming": "Process is upcoming"
+    },
+    "voters": "Voters",
+    "votes": "Votes"
+  },
+  "process_actions": {
+    "pause": "pause",
+    "play": "play",
+    "stop": "stop"
+  },
+  "read_less": "Read less",
+  "read_more": "Read more",
+  "search": {
+    "input_placeholder": "Search"
+  },
+  "share": {
+    "facebook": "Share to twitter",
+    "twitter": "Share to twitter"
+  },
+  "submited_votes": "Submitted votes",
+  "voting_elections": "Voting elections",
+  "work_in_progress": "Work in progress"
+}

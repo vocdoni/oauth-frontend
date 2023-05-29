@@ -1,0 +1,102 @@
+{
+  "cc": {
+    "actions": {
+      "cancel": "",
+      "cancel_description": "",
+      "continue": "",
+      "end": "",
+      "end_description": "",
+      "error_title": "",
+      "pause": "",
+      "pause_description": "",
+      "waiting_title": ""
+    },
+    "empty": "",
+    "required": "",
+    "results": {
+      "date_format": "",
+      "secret_until_the_end": "",
+      "title": "",
+      "votes": ""
+    },
+    "statuses": {
+      "CANCELED": "",
+      "ENDED": "",
+      "ONGOING": "",
+      "PAUSED": "",
+      "PROCESS_UNKNOWN": "",
+      "RESULTS": "",
+      "UPCOMING": ""
+    },
+    "vote": {
+      "button": "",
+      "button_update": "",
+      "missing_answers": "",
+      "voted_description": "",
+      "voted_title": ""
+    }
+  },
+  "create_a_new_process": "",
+  "footer": {
+    "about": "",
+    "blog": "",
+    "company": "",
+    "contact": "",
+    "developer_portal": "",
+    "developers": "",
+    "guides": "",
+    "how_we_work": "",
+    "resources": "",
+    "tutorials": "",
+    "vocdoni_api": "",
+    "vocdoni_app": ""
+  },
+  "form": {
+    "error": {
+      "address_pattern": "",
+      "field_is_required": ""
+    },
+    "process_create": {
+      "address_title": "",
+      "address_weight": "",
+      "addresses_title": "",
+      "advanced_settings": "",
+      "autostart": "",
+      "date_end": "",
+      "date_start": "",
+      "interruptible": "",
+      "max_vote_overwrites": "",
+      "process_description": "",
+      "process_description_placeholder": "",
+      "process_title": "",
+      "process_title_placeholder": "",
+      "question_delete": "",
+      "question_identifier": "",
+      "question_placeholder": "",
+      "question_title": "",
+      "questions_title": "",
+      "secret_until_the_end": "",
+      "settings": "",
+      "submit": "",
+      "success_description": "",
+      "success_title": "",
+      "weighted_vote": ""
+    }
+  },
+  "home": {
+    "go": "",
+    "select_one_of_your_processes": "",
+    "select_process": ""
+  },
+  "link": {
+    "discord": "",
+    "github": "",
+    "twitter": ""
+  },
+  "loading": "Cargando...",
+  "logout": "",
+  "menu": {
+    "connect": "Conectar"
+  },
+  "or_create_a_new_one": ""
+}
