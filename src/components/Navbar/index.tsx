@@ -19,10 +19,13 @@ import { useRef } from 'react'
 import { Account } from '../../components/Account'
 import { useTranslation } from 'react-i18next'
 import { LanguagesSlice } from '../../i18n/languages.mjs'
+import { useAccount } from 'wagmi'
+import { NavLink } from 'react-router-dom'
 
 const Navbar = ({ ...props }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { onClose } = useDisclosure()
   const { i18n, t } = useTranslation()
+  const { isConnected } = useAccount()
 
   const languages = LanguagesSlice as { [key: string]: string }
 
@@ -40,7 +43,14 @@ const Navbar = ({ ...props }) => {
           <Image src='/logo.svg' alt='logo' h={10} />
         </a>
 
-        <List>
+        <List display={{ base: 'none', lg: 'flex' }} alignItems='center' gap={4}>
+          {isConnected && (
+            <ListItem listStyleType='none' onClick={onClose} whiteSpace='nowrap'>
+              <NavLink to='/processes/create'>
+                <Button colorScheme='buttons.primary'>{t('menu.create_process')}</Button>
+              </NavLink>
+            </ListItem>
+          )}
           <ListItem listStyleType='none' display='flex' cursor='pointer'>
             <Menu>
               <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
@@ -64,8 +74,10 @@ const Navbar = ({ ...props }) => {
                   ))}
                 </MenuOptionGroup>
               </MenuList>
-              <Account />
             </Menu>
+          </ListItem>
+          <ListItem listStyleType='none'>
+            <Account />
           </ListItem>
         </List>
       </Flex>
