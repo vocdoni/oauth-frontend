@@ -98,7 +98,7 @@ const Home = () => {
 
         {elections && elections.length > 0 && <FormLabel mt={4}>{t('or_create_a_new_one')}</FormLabel>}
 
-        <Button width={'full'} type='submit' colorScheme={'blue'} onClick={() => navigate('/process/create')}>
+        <Button width={'full'} type='submit' colorScheme={'blue'} onClick={() => navigate('/processes/create')}>
           {t('create_a_new_process')}
         </Button>
       </Box>

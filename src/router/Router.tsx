@@ -7,6 +7,7 @@ import Error from '../elements/Error'
 import LayoutHome from '../elements/LayoutHome'
 import LayoutContents from '../elements/LayoutContents'
 import { SuspenseLoader } from './SuspenseLoader'
+import Organization from '../elements/Organization'
 
 // Lazy loading helps splitting the final code, which helps downloading the app (theoretically)
 const ProtectedRoutes = lazy(() => import('./ProtectedRoutes'))
@@ -14,6 +15,7 @@ const ProcessCreate = lazy(() => import('../elements/ProcessCreation'))
 const Home = lazy(() => import('../elements/Home'))
 const NotFound = lazy(() => import('../elements/NotFound'))
 const Process = lazy(() => import('../elements/Process'))
+const ProcessList = lazy(() => import('../elements/Organization'))
 
 export const RoutesProvider = () => {
   const router = createHashRouter(
@@ -39,7 +41,15 @@ export const RoutesProvider = () => {
               }
             >
               <Route
-                path='process/create'
+                path='processes/'
+                element={
+                  <SuspenseLoader>
+                    <Organization />
+                  </SuspenseLoader>
+                }
+              />
+              <Route
+                path='processes/create'
                 element={
                   <SuspenseLoader>
                     <ProcessCreate />
@@ -47,7 +57,7 @@ export const RoutesProvider = () => {
                 }
               />
               <Route
-                path='process/:id'
+                path='processes/:id'
                 element={
                   <SuspenseLoader>
                     <Process />

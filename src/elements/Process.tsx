@@ -33,12 +33,13 @@ import {
 import { AddIcon, CheckIcon, CloseIcon, DeleteIcon, RepeatIcon, SearchIcon } from '@chakra-ui/icons'
 import { Field, Form, Formik } from 'formik'
 import GithubUserSearch from '../components/GithubUserSearch'
-import { useClient } from '@vocdoni/chakra-components'
+import { ElectionActions, ElectionProvider, useClient } from '@vocdoni/chakra-components'
 import { PublishedElection } from '@vocdoni/sdk'
+import { ElectionStatus } from '@vocdoni/sdk'
 
 const Process = () => {
   const { id } = useParams()
-  const { vocdoniAdminClient, getAdminToken } = useCspAdmin()
+  const { vocdoniAdminClient } = useCspAdmin()
   const navigate = useNavigate()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { client } = useClient()
@@ -52,9 +53,6 @@ const Process = () => {
   useEffect(() => {
     ;(async function iife() {
       if (!vocdoniAdminClient) return
-
-      const adminToken = await getAdminToken(id)
-      if (!adminToken) navigate('/')
 
       if (!election) {
         try {
@@ -137,12 +135,19 @@ const Process = () => {
   return (
     <Box rounded={'lg'} bgColor={'white'} boxShadow={'lg'} p={[4, 8]} pt={[4, 6]}>
       {election && (
-        <>
-          <Heading mb={5}>{election?.title.default}</Heading>
-          <Box mb={7}>
-            <p>{election?.description.default}</p>
+        <Flex justify={'space-between'}>
+          <Box>
+            <Heading mb={5}>{election?.title.default}</Heading>
+            <Box mb={7}>
+              <p>{election?.description.default}</p>
+            </Box>
           </Box>
-        </>
+          <Box>
+            <ElectionProvider election={election} autoUpdate>
+              <ElectionActions />
+            </ElectionProvider>
+          </Box>
+        </Flex>
       )}
 
       <Flex mt={5} gap={2}>

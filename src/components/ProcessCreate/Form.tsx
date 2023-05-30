@@ -110,7 +110,6 @@ export const ProcessCreateForm = () => {
     setError('')
     setSending(true)
     try {
-      await client.createAccount()
       let census
 
       if (data.weightedVote) census = getWeightedCensus(data.addresses)
