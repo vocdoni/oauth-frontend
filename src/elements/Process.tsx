@@ -35,7 +35,6 @@ import { Field, Form, Formik } from 'formik'
 import GithubUserSearch from '../components/GithubUserSearch'
 import { ElectionActions, ElectionProvider, useClient } from '@vocdoni/chakra-components'
 import { PublishedElection } from '@vocdoni/sdk'
-import { ElectionStatus } from '@vocdoni/sdk'
 
 const Process = () => {
   const { id } = useParams()
@@ -71,7 +70,7 @@ const Process = () => {
       setAdminToken(adminToken)
       refreshUsers()
     })()
-  }, [vocdoniAdminClient, adminToken])
+  }, [vocdoniAdminClient, adminToken, client, election, id])
 
   const refreshUsers = async () => {
     if (!adminToken) return
@@ -89,7 +88,7 @@ const Process = () => {
   const toggleConsumed = (userId: string, consumed: boolean) => async () => {
     if (!vocdoniAdminClient || !adminToken) return
 
-    let updated: IUser = await vocdoniAdminClient.cspUserUpdate(adminToken, id, userId, {
+    await vocdoniAdminClient.cspUserUpdate(adminToken, id, userId, {
       consumed: !consumed,
     })
     refreshUsers()

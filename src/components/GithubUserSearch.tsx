@@ -16,13 +16,13 @@ const GithubUserSearch = ({ ...props }) => {
     }
 
     setSearchTimeout(setTimeout(searchUsername, 500))
-  }, [searchQuery])
+  }, [searchQuery, searchTimeout])
 
   useEffect(() => {
     if (typeof props.onUpdateSelection === 'function') {
       props.onUpdateSelection(clickedUsers)
     }
-  }, [clickedUsers])
+  }, [clickedUsers, props])
 
   const handleInputChange = (text: string) => {
     setSearchQuery(text)
