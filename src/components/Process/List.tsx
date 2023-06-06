@@ -44,6 +44,9 @@ const ProcessList = () => {
           setFinished(true)
         }
 
+        // Remove from res the elements where census.type is not "csp"
+        res = res.filter((election) => election.census.type === 'csp')
+
         setElectionsList((prev: PublishedElection[]) => {
           if (prev) return [...prev, ...res]
           return res

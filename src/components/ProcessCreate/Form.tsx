@@ -1,6 +1,6 @@
 import { Alert, AlertIcon, Button, Flex, FormControl, FormLabel, useToast } from '@chakra-ui/react'
 import { useClient } from '@vocdoni/chakra-components'
-import { Election, IQuestion, PlainCensus, WeightedCensus } from '@vocdoni/sdk'
+import { CspCensus, Election, IQuestion, PlainCensus, WeightedCensus } from '@vocdoni/sdk'
 import { useEffect, useState } from 'react'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
@@ -110,17 +110,10 @@ export const ProcessCreateForm = () => {
     setError('')
     setSending(true)
     try {
-      let census
-
-      if (data.weightedVote) census = getWeightedCensus(data.addresses)
-      else {
-        const addresses = data.addresses.map((add) => add.address)
-        census = await getPlainCensus(addresses)
-      }
-
       const election = Election.from({
         ...data,
-        census,
+        maxCensusSize: 100000, //TODO: make this configurable
+        census: new CspCensus(process.env.REACT_APP_CSP_PUBKEY as string, process.env.REACT_APP_CSP_URL as string),
         // map questions back to IQuestion[]
         questions: data.questions.map(
           (question) =>
