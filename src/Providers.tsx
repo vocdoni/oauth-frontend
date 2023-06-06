@@ -10,7 +10,7 @@ import { App } from './App'
 import { ChakraProvider, ColorModeScript, useColorMode } from '@chakra-ui/react'
 import { translations } from './i18n/components'
 import { VocdoniEnvironment } from './constants'
-import { Signer } from '@ethersproject/abstract-signer'
+import { Signer } from 'ethers'
 
 export const Providers = () => (
   <>
@@ -30,7 +30,7 @@ export const AppProviders = () => {
 
   return (
     <RainbowKitProvider chains={chains} theme={rainbowStyles(colorMode)}>
-      <CspAdminProvider>
+      <CspAdminProvider signer={signer as Signer}>
         <ClientProvider env={VocdoniEnvironment as EnvOptions} signer={signer as Signer} translations={translations(t)}>
           <App />
         </ClientProvider>

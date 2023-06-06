@@ -13,7 +13,7 @@ import CreateProcessSettings from './Settings'
 import WrapperFormSection from './WrapperFormSection'
 import GithubUserSearch from '../GithubUserSearch'
 import { useCspAdmin } from '../../hooks/use-csp'
-import { IElection } from 'vocdoni-admin-sdk'
+import { IElection, IElectionWithTokenResponse } from 'vocdoni-admin-sdk'
 
 export interface FormValues {
   title: string
@@ -74,7 +74,7 @@ export const ProcessCreateForm = () => {
   const { t } = useTranslation()
   const toast = useToast()
   const [selectedUsers, setSelectedUsers] = useState<any[]>([])
-  const { vocdoniAdminClient } = useCspAdmin()
+  const { vocdoniAdminClient, saveAdminToken } = useCspAdmin()
 
   const methods = useForm<FormValues>({
     defaultValues: {
@@ -147,7 +147,8 @@ export const ProcessCreateForm = () => {
       })
 
       // Setting up the CSP for the created election
-      await createElectionInCsp(pid)
+      const createdCspElection: IElectionWithTokenResponse = await createElectionInCsp(pid)
+      await saveAdminToken(pid, createdCspElection.adminToken)
 
       setTimeout(() => navigate(`/process/${pid}`), 3000)
     } catch (err: any) {
@@ -160,8 +161,8 @@ export const ProcessCreateForm = () => {
     }
   }
 
-  const createElectionInCsp = async (electionId: string) => {
-    if (!vocdoniAdminClient) return
+  const createElectionInCsp = async (electionId: string): Promise<IElectionWithTokenResponse> => {
+    if (!vocdoniAdminClient) throw new Error('Vocdoni Admin Client not initialized')
 
     const cspElection: IElection = {
       electionId: electionId,

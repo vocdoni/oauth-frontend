@@ -1,18 +1,64 @@
 import { ReactNode, createContext, useContext, useEffect, useState } from 'react'
-import { VocdoniAdminSDKClient } from 'vocdoni-admin-sdk'
+import { CspAdminClientOptions, VocdoniAdminSDKClient } from 'vocdoni-admin-sdk'
+import { Wallet, Signer } from 'ethers'
+import localforage from 'localforage'
 
 export const CspAdminContext = createContext<any>(null)
-export const CspAdminProvider = ({ children }: { children: ReactNode }) => {
+
+export type CspAdminProviderProps = {
+  children?: ReactNode
+  signer?: Wallet | Signer
+}
+
+export const CspAdminProvider = ({ children, signer }: CspAdminProviderProps) => {
   const [vocdoniAdminClient, setVocdoniAdminClient] = useState<any>(null)
+  const [requestingSignature, setRequestingSignature] = useState<boolean>(false)
 
   useEffect(() => {
     ;(async function iife() {
-      setVocdoniAdminClient(new VocdoniAdminSDKClient({ csp_url: process.env.REACT_APP_CSP_URL }))
+      const opts: CspAdminClientOptions = {
+        cspUrl: process.env.REACT_APP_CSP_URL,
+      }
+
+      if (signer) {
+        opts.wallet = signer as Wallet | Signer
+      }
+
+      setVocdoniAdminClient(new VocdoniAdminSDKClient(opts))
     })()
-  }, [])
+  }, [signer])
+
+  const saveAdminToken = async (electionId: string, adminToken: string): Promise<any[]> => {
+    let tokens: any[] = (await localforage.getItem('adminTokens')) || []
+    tokens.push({ electionId, adminToken })
+    return await localforage.setItem('adminTokens', tokens)
+  }
+
+  const getAdminToken = async (electionId: string): Promise<string | null> => {
+    let tokens: any[] = (await localforage.getItem('adminTokens')) || []
+    const token = tokens.find((t) => t.electionId === electionId)
+
+    // If it's in memory return it
+    if (token?.adminToken) {
+      return token?.adminToken
+    }
+
+    // Force user auth to get the token
+    try {
+      const res = await vocdoniAdminClient.cspElectionAuth(electionId, 'verifyingAdmin_' + Math.random())
+      saveAdminToken(electionId, res.adminToken)
+      return res.adminToken
+    } catch (e) {
+      console.log(e)
+    }
+
+    return null
+  }
 
   const value = {
     vocdoniAdminClient,
+    saveAdminToken,
+    getAdminToken,
   }
   return <CspAdminContext.Provider value={value}>{children}</CspAdminContext.Provider>
 }

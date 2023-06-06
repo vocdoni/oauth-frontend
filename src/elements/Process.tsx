@@ -38,7 +38,7 @@ import { PublishedElection } from '@vocdoni/sdk'
 
 const Process = () => {
   const { id } = useParams()
-  const { vocdoniAdminClient } = useCspAdmin()
+  const { vocdoniAdminClient, getAdminToken } = useCspAdmin()
   const navigate = useNavigate()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { client } = useClient()
@@ -51,7 +51,20 @@ const Process = () => {
 
   useEffect(() => {
     ;(async function iife() {
-      if (!vocdoniAdminClient) return
+      if (!vocdoniAdminClient || !client || !id) return
+
+      const adminToken = await getAdminToken(id)
+      if (!adminToken) {
+        toast({
+          title: 'Error obtaining permissions',
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+        })
+
+        navigate('/')
+      }
+      setAdminToken(adminToken)
 
       if (!election) {
         try {
@@ -67,13 +80,12 @@ const Process = () => {
         }
       }
 
-      setAdminToken(adminToken)
       refreshUsers()
     })()
-  }, [vocdoniAdminClient, adminToken, client, election, id])
+  }, [vocdoniAdminClient, client, adminToken, id])
 
   const refreshUsers = async () => {
-    if (!adminToken) return
+    if (!vocdoniAdminClient || !adminToken) return
 
     setUsers((await vocdoniAdminClient.cspUserList(adminToken, id)) || [])
   }

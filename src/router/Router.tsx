@@ -4,7 +4,6 @@ import { createHashRouter, createRoutesFromElements, Route, RouterProvider } fro
 // These aren't lazy loaded to avoid excessive loaders in different locations
 import Layout from '../elements/Layout'
 import Error from '../elements/Error'
-import LayoutHome from '../elements/LayoutHome'
 import LayoutContents from '../elements/LayoutContents'
 import { SuspenseLoader } from './SuspenseLoader'
 
@@ -21,7 +20,7 @@ export const RoutesProvider = () => {
     createRoutesFromElements(
       <Route path='/' element={<Layout />}>
         <Route errorElement={<Error />}>
-          <Route element={<LayoutHome />}>
+          <Route element={<LayoutContents />}>
             <Route
               index
               element={
