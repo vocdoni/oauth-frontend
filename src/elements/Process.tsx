@@ -35,6 +35,7 @@ import { Field, Form, Formik } from 'formik'
 import GithubUserSearch from '../components/GithubUserSearch'
 import { ElectionActions, ElectionProvider, useClient } from '@vocdoni/chakra-components'
 import { PublishedElection } from '@vocdoni/sdk'
+import { useTranslation } from 'react-i18next'
 
 const Process = () => {
   const { id } = useParams()
@@ -43,6 +44,7 @@ const Process = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { client } = useClient()
   const toast = useToast()
+  const { t } = useTranslation()
 
   const [adminToken, setAdminToken] = useState<string>('')
   const [election, setElection] = useState<PublishedElection>()
@@ -56,7 +58,7 @@ const Process = () => {
       const adminToken = await getAdminToken(id)
       if (!adminToken) {
         toast({
-          title: 'Error obtaining permissions',
+          title: t('form.process.error_csp_permissions'),
           status: 'error',
           duration: 5000,
           isClosable: true,
@@ -71,7 +73,7 @@ const Process = () => {
           setElection(await client.fetchElection(id))
         } catch (e) {
           toast({
-            title: 'Error fetching election',
+            title: t('form.process.error_fetching_election'),
             status: 'error',
             duration: 5000,
             isClosable: true,
@@ -164,13 +166,13 @@ const Process = () => {
       <Flex mt={5} gap={2}>
         <Button onClick={onOpen}>
           <AddIcon boxSize={3} color='blue.500' mr={2} />
-          Add Users
+          {t('csp_census.add_users')}
         </Button>
 
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent>
-            <ModalHeader>Select Gitub users</ModalHeader>
+            <ModalHeader>{t('csp_census.modal.title')}</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
               <GithubUserSearch onUpdateSelection={updatedGithubSelection} />
@@ -178,7 +180,7 @@ const Process = () => {
 
             <ModalFooter>
               <Button colorScheme='blue' mr={3} onClick={onClose}>
-                Done
+                {t('csp_census.modal.close')}
               </Button>
             </ModalFooter>
           </ModalContent>
@@ -225,12 +227,12 @@ const Process = () => {
       <Table mt={2}>
         <Thead>
           <Tr>
-            <Th>Consumed</Th>
-            <Th>Data</Th>
+            <Th>{t('csp_census.table.comsumed')}</Th>
+            <Th>{t('csp_census.table.data')}</Th>
             {/* <Th>Handler</Th>
               <Th>Service</Th>
               <Th>Mode</Th> */}
-            <Th>Actions</Th>
+            <Th>{t('csp_census.table.actions')}</Th>
           </Tr>
         </Thead>
         <Tbody>
@@ -246,7 +248,7 @@ const Process = () => {
                   <Flex justifyContent='flex-end'>
                     <Button onClick={toggleConsumed(e.userId as string, e.consumed)} mr={1}>
                       <RepeatIcon boxSize={3} color='blue.500' mr={2} />
-                      {e.consumed ? 'Set as not voted' : 'Set as voted'}
+                      {e.consumed ? t('csp_census.table.set_as_not_voted') : t('csp_census.table.set_as_voted')}
                     </Button>
 
                     <IconButton

@@ -1,9 +1,11 @@
 import { Flex, FormLabel, Input, List, ListItem, useToast } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 import UserCard from './UserCard'
+import { useTranslation } from 'react-i18next'
 
 const GithubUserSearch = ({ ...props }) => {
   const toast = useToast()
+  const { t } = useTranslation()
 
   const [searchQuery, setSearchQuery] = useState<string>('')
   const [searchTimeout, setSearchTimeout] = useState<any>(null)
@@ -39,7 +41,7 @@ const GithubUserSearch = ({ ...props }) => {
     } catch (error) {
       console.error('Error fetching users:', error)
       toast({
-        title: 'Error fetching users',
+        title: t('csp_census.github.error_fetching_users'),
         status: 'error',
         duration: 5000,
         isClosable: true,
@@ -80,7 +82,7 @@ const GithubUserSearch = ({ ...props }) => {
 
       {props.showSelectedList && clickedUsers.length > 0 && (
         <>
-          <FormLabel mt={8}>Selected Github users</FormLabel>
+          <FormLabel mt={8}>{t('csp_census.github.selected_users')}</FormLabel>
           <List>
             <Flex>
               {clickedUsers.map((user) => (

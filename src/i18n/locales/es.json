@@ -36,7 +36,24 @@
       "voted_title": ""
     }
   },
-  "create_a_new_process": "",
+  "csp_census": {
+    "add_users": "",
+    "github": {
+      "error_fetching_users": "",
+      "selected_users": ""
+    },
+    "modal": {
+      "close": "",
+      "title": ""
+    },
+    "table": {
+      "actions": "",
+      "comsumed": "",
+      "data": "",
+      "set_as_not_voted": "",
+      "set_as_voted": ""
+    }
+  },
   "footer": {
     "about": "",
     "blog": "",
@@ -52,9 +69,20 @@
     "vocdoni_app": ""
   },
   "form": {
+    "account_create": {
+      "account_description": "",
+      "account_name": "",
+      "account_name_note": "",
+      "button_create": ""
+    },
     "error": {
       "address_pattern": "",
-      "field_is_required": ""
+      "field_is_required": "",
+      "field_is_too_long": ""
+    },
+    "process": {
+      "error_csp_permissions": "",
+      "error_fetching_election": ""
     },
     "process_create": {
       "address_title": "",
@@ -76,17 +104,14 @@
       "question_title": "",
       "questions_title": "",
       "secret_until_the_end": "",
+      "select_github_users": "",
       "settings": "",
       "submit": "",
       "success_description": "",
       "success_title": "",
+      "unhealthy_account": "",
       "weighted_vote": ""
     }
-  },
-  "home": {
-    "go": "",
-    "select_one_of_your_processes": "",
-    "select_process": ""
   },
   "link": {
     "discord": "",
@@ -96,7 +121,27 @@
   "loading": "Cargando...",
   "logout": "",
   "menu": {
-    "connect": "Conectar"
+    "connect": "Conectar",
+    "create_process": "Crear proceso"
   },
-  "or_create_a_new_one": ""
+  "organization": {
+    "elections_list_empty": ""
+  },
+  "process": {
+    "date": {
+      "ended": "Finalizado",
+      "ends": "Finaliza",
+      "relative": "{{ date, relative(past: hace %time; future: en %time) }}",
+      "starts": "Empieza"
+    },
+    "status": {
+      "canceled": ""
+    },
+    "voters": ""
+  },
+  "process_actions": {
+    "pause": "",
+    "play": "",
+    "stop": ""
+  }
 }

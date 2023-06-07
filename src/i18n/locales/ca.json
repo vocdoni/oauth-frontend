@@ -1,102 +1,147 @@
 {
   "cc": {
     "actions": {
-      "cancel": "",
-      "cancel_description": "",
-      "continue": "",
-      "end": "",
-      "end_description": "",
-      "error_title": "",
-      "pause": "",
-      "pause_description": "",
-      "waiting_title": ""
+      "cancel": "Cancel·la el procés immediatament, sense permetre vots nous i sense comptar cap resultat (precaució: no es pot desfer)",
+      "cancel_description": "cancel·lant el procés d'elecció \"{{ election.title.default }}\"",
+      "continue": "Continua el procés immediatament, en cas que s'hagi pausat",
+      "end": "Finalitza el procés immediatament, impedint l'enviament de nous vots i mostra els resultats de votació (precaució: no es pot desfer)",
+      "end_description": "finalitzant el procés d'elecció \"{{ election.title.default }}\"",
+      "error_title": "Hi va haver un error en executar la transacció",
+      "pause": "Posa en pausa el procés de votació temporalment, fins que es reprengui manualment. Mentre el procés estigui en pausa, els votants no podran enviar vots.",
+      "pause_description": "posant en pausa el procés d'elecció \"{{ election.title.default }}\"",
+      "waiting_title": "Esperant la confirmació de la transacció..."
     },
-    "empty": "",
-    "required": "",
+    "empty": "Aparentment, aquest procés no té preguntes 🤔",
+    "required": "Aquest camp és obligatori",
     "results": {
-      "date_format": "",
-      "secret_until_the_end": "",
-      "title": "",
-      "votes": ""
+      "date_format": "d-L-y HH:mm",
+      "secret_until_the_end": "Secret fins al final. Els resultats estaran disponibles quan el procés finalitzi el {{ endDate }}",
+      "title": "Resultats per a \"{{ title }}\"",
+      "votes": "Vots: {{ votes }} ({{ percent }})"
     },
     "statuses": {
-      "CANCELED": "",
-      "ENDED": "",
-      "ONGOING": "",
-      "PAUSED": "",
-      "PROCESS_UNKNOWN": "",
-      "RESULTS": "",
-      "UPCOMING": ""
+      "CANCELED": "Cancel·lat",
+      "ENDED": "Finalitzat",
+      "ONGOING": "En curs",
+      "PAUSED": "En pausa",
+      "PROCESS_UNKNOWN": "Desconegut",
+      "RESULTS": "Resultats",
+      "UPCOMING": "Properament"
     },
     "vote": {
-      "button": "",
-      "button_update": "",
-      "missing_answers": "",
-      "voted_description": "",
-      "voted_title": ""
+      "button": "Vota",
+      "button_update": "Reenvia el vot",
+      "missing_answers": "Has de respondre totes les preguntes",
+      "voted_description": "El teu ID de vot és {{ id }}. Pots utilitzar-lo per verificar el teu vot.",
+      "voted_title": "El teu vot s'ha realitzat amb èxit!"
     }
   },
-  "create_a_new_process": "",
+  "csp_census": {
+    "add_users": "",
+    "github": {
+      "error_fetching_users": "",
+      "selected_users": ""
+    },
+    "modal": {
+      "close": "",
+      "title": ""
+    },
+    "table": {
+      "actions": "",
+      "comsumed": "",
+      "data": "",
+      "set_as_not_voted": "",
+      "set_as_voted": ""
+    }
+  },
   "footer": {
-    "about": "",
-    "blog": "",
-    "company": "",
-    "contact": "",
-    "developer_portal": "",
-    "developers": "",
-    "guides": "",
-    "how_we_work": "",
-    "resources": "",
-    "tutorials": "",
-    "vocdoni_api": "",
-    "vocdoni_app": ""
+    "about": "Sobre nosaltres",
+    "blog": "Blog",
+    "company": "empresa",
+    "contact": "Contacte",
+    "developer_portal": "Portal de desenvolupadors",
+    "developers": "desenvolupadors",
+    "guides": "Guies",
+    "how_we_work": "Com treballem",
+    "resources": "Recursos",
+    "tutorials": "Tutorials",
+    "vocdoni_api": "API de Vocdoni",
+    "vocdoni_app": "Aplicació Vocdoni"
   },
   "form": {
+    "account_create": {
+      "account_description": "",
+      "account_name": "",
+      "account_name_note": "",
+      "button_create": ""
+    },
     "error": {
-      "address_pattern": "",
-      "field_is_required": ""
+      "address_pattern": "Només s'admeten adreces hexadecimals",
+      "field_is_required": "Aquest camp és obligatori",
+      "field_is_too_long": ""
+    },
+    "process": {
+      "error_csp_permissions": "",
+      "error_fetching_election": ""
     },
     "process_create": {
-      "address_title": "",
-      "address_weight": "",
-      "addresses_title": "",
-      "advanced_settings": "",
-      "autostart": "",
-      "date_end": "",
-      "date_start": "",
-      "interruptible": "",
-      "max_vote_overwrites": "",
-      "process_description": "",
-      "process_description_placeholder": "",
-      "process_title": "",
-      "process_title_placeholder": "",
-      "question_delete": "",
-      "question_identifier": "",
-      "question_placeholder": "",
-      "question_title": "",
-      "questions_title": "",
-      "secret_until_the_end": "",
-      "settings": "",
-      "submit": "",
-      "success_description": "",
-      "success_title": "",
-      "weighted_vote": ""
+      "address_title": "Adreça {{ num }}",
+      "address_weight": "Pes",
+      "addresses_title": "Adreces",
+      "advanced_settings": "Configuració avançada",
+      "autostart": "Inici automàtic",
+      "date_end": "Data de finalització:",
+      "date_start": "Data d'inici:",
+      "interruptible": "Interrumpible",
+      "max_vote_overwrites": "Màx. de reescriptures per vot",
+      "process_description": "Descripció",
+      "process_description_placeholder": "Una descripció detallada",
+      "process_title": "Títol",
+      "process_title_placeholder": "Títol principal del procés",
+      "question_delete": "Eliminar pregunta {{ num }}",
+      "question_identifier": "Pregunta {{ num }}",
+      "question_placeholder": "Títol de la pregunta {{ num }}",
+      "question_title": "Títol",
+      "questions_title": "Preguntes",
+      "secret_until_the_end": "Secret fins al final",
+      "select_github_users": "",
+      "settings": "Configuració de l'elecció",
+      "submit": "Crear procés",
+      "success_description": "Redirigint a la pàgina del procés d'elecció...",
+      "success_title": "Procés d'elecció creat amb èxit",
+      "unhealthy_account": "",
+      "weighted_vote": "Vot ponderat"
     }
   },
-  "home": {
-    "go": "",
-    "select_one_of_your_processes": "",
-    "select_process": ""
-  },
   "link": {
-    "discord": "",
-    "github": "",
-    "twitter": ""
+    "discord": "Enllaç al discord de Vocdoni",
+    "github": "Enllaç al github de Vocdoni",
+    "twitter": "Enllaç al Twitter de Vocdoni"
   },
   "loading": "Carregant...",
-  "logout": "",
+  "logout": "Tancar sessió",
   "menu": {
-    "connect": "Connecta"
+    "connect": "Connecta",
+    "create_process": "Crear procés"
   },
-  "or_create_a_new_one": ""
+  "organization": {
+    "elections_list_empty": "Aquesta organització encara no té eleccions"
+  },
+  "process": {
+    "date": {
+      "ended": "Procés finalitzat",
+      "ends": "Acaba el procés",
+      "relative": "{{ date, relative(past: fa %time; future: en %time) }}",
+      "starts": "Comença el procés"
+    },
+    "status": {
+      "canceled": "Procés cancel·lat"
+    },
+    "voters": "Votants"
+  },
+  "process_actions": {
+    "pause": "pausa",
+    "play": "reproduir",
+    "stop": "aturar"
+  }
 }

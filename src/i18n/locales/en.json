@@ -36,7 +36,24 @@
       "voted_title": "Your vote was successfully cast!"
     }
   },
-  "create_a_new_process": "",
+  "csp_census": {
+    "add_users": "",
+    "github": {
+      "error_fetching_users": "",
+      "selected_users": ""
+    },
+    "modal": {
+      "close": "",
+      "title": ""
+    },
+    "table": {
+      "actions": "",
+      "comsumed": "",
+      "data": "",
+      "set_as_not_voted": "",
+      "set_as_voted": ""
+    }
+  },
   "footer": {
     "about": "About",
     "blog": "Blog",
@@ -52,9 +69,20 @@
     "vocdoni_app": "Vocdoni APP"
   },
   "form": {
+    "account_create": {
+      "account_description": "",
+      "account_name": "",
+      "account_name_note": "",
+      "button_create": ""
+    },
     "error": {
       "address_pattern": "Only hex addresses are allowed",
-      "field_is_required": "This field is required"
+      "field_is_required": "This field is required",
+      "field_is_too_long": ""
+    },
+    "process": {
+      "error_csp_permissions": "Error while fetching permissions",
+      "error_fetching_election": "Error while fetching election"
     },
     "process_create": {
       "address_title": "Address {{ num }}",
@@ -76,17 +104,14 @@
       "question_title": "Title",
       "questions_title": "Questions",
       "secret_until_the_end": "Secret until the end",
+      "select_github_users": "Select Github Users",
       "settings": "Election settings",
       "submit": "Create process",
       "success_description": "Redirecting you to the election process page...",
       "success_title": "Election process successfully created",
+      "unhealthy_account": "",
       "weighted_vote": "Weighted vote"
     }
-  },
-  "home": {
-    "go": "",
-    "select_one_of_your_processes": "",
-    "select_process": ""
   },
   "link": {
     "discord": "Link to Vocdoni's discord",
@@ -96,7 +121,27 @@
   "loading": "Loading...",
   "logout": "Logout",
   "menu": {
-    "connect": "Connect"
+    "connect": "Connect",
+    "create_process": "Create process"
   },
-  "or_create_a_new_one": ""
+  "organization": {
+    "elections_list_empty": "This organization has no elections yet"
+  },
+  "process": {
+    "date": {
+      "ended": "Process ended",
+      "ends": "Process ends",
+      "relative": "{{ date, relative(past: %time ago; future: in %time) }}",
+      "starts": "Process starts"
+    },
+    "status": {
+      "canceled": "Process canceled"
+    },
+    "voters": "Voters"
+  },
+  "process_actions": {
+    "pause": "pause",
+    "play": "play",
+    "stop": "stop"
+  }
 }
