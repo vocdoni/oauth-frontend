@@ -1,5 +1,6 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom/client'
+import './i18n'
 import reportWebVitals from './reportWebVitals'
 import * as serviceWorker from './serviceWorker'
 import { Providers } from './Providers'

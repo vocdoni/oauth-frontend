@@ -37,21 +37,21 @@
     }
   },
   "csp_census": {
-    "add_users": "",
+    "add_users": "Afegir usuaris",
     "github": {
-      "error_fetching_users": "",
-      "selected_users": ""
+      "error_fetching_users": "S'ha produït un error en recuperar els usuaris de GitHub",
+      "selected_users": "Usuaris seleccionats"
     },
     "modal": {
-      "close": "",
-      "title": ""
+      "close": "Ok!",
+      "title": "Cerca usuaris de Github"
     },
     "table": {
-      "actions": "",
-      "comsumed": "",
-      "data": "",
-      "set_as_not_voted": "",
-      "set_as_voted": ""
+      "actions": "Accions",
+      "comsumed": "Consumit",
+      "data": "Dades",
+      "set_as_not_voted": "Establir com a no votat",
+      "set_as_voted": "Establir com a votat"
     }
   },
   "footer": {
