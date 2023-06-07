@@ -22,7 +22,7 @@ const GithubUserSearch = ({ ...props }) => {
     if (typeof props.onUpdateSelection === 'function') {
       props.onUpdateSelection(clickedUsers)
     }
-  }, [clickedUsers, props])
+  }, [clickedUsers])
 
   const handleInputChange = (text: string) => {
     setSearchQuery(text)
