@@ -17,7 +17,7 @@ const GithubUserSearch = ({ ...props }) => {
       clearTimeout(searchTimeout)
     }
 
-    setSearchTimeout(setTimeout(searchUsername, 500))
+    setSearchTimeout(setTimeout(search, 500))
   }, [searchQuery])
 
   useEffect(() => {
@@ -30,14 +30,22 @@ const GithubUserSearch = ({ ...props }) => {
     setSearchQuery(text)
   }
 
-  const searchUsername = async () => {
+  const search = async () => {
     setUserList([])
     if (!searchQuery) return
 
     try {
-      const response = await fetch(`https://api.github.com/search/users?q=${searchQuery}`)
-      const data = await response.json()
-      setUserList(data.items)
+      let ulist = []
+      let response = await fetch(`https://api.github.com/search/users?q=${searchQuery}`)
+      let data = await response.json()
+      ulist.push(...data.items)
+
+      // Adding organization members
+      response = await fetch(`https://api.github.com/orgs/${searchQuery}/public_members`)
+      data = await response.json()
+      ulist.push(...data)
+
+      setUserList(ulist)
     } catch (error) {
       console.error('Error fetching users:', error)
       toast({
