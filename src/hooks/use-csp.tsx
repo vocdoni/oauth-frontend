@@ -45,7 +45,10 @@ export const CspAdminProvider = ({ children, signer }: CspAdminProviderProps) =>
 
     // Force user auth to get the token
     try {
-      const res = await vocdoniAdminClient.cspElectionAuth(electionId, 'verifyingAdmin_' + Math.random())
+      const res = await vocdoniAdminClient.cspElectionAuth(
+        electionId,
+        JSON.stringify({ election: electionId, random: Math.random() })
+      )
       saveAdminToken(electionId, res.adminToken)
       return res.adminToken
     } catch (e) {
