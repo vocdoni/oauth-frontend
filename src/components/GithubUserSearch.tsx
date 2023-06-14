@@ -48,8 +48,8 @@ const GithubUserSearch = ({ ...props }) => {
       if (data.length > 0) {
         ulist.push(...data)
       }
-
-      setUserList(ulist)
+      const uniqueArray = ulist.filter((obj, index, self) => self.findIndex((o) => o.id === obj.id) === index)
+      setUserList(uniqueArray)
     } catch (error) {
       console.error('Error fetching users:', error)
       toast({

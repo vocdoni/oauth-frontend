@@ -140,10 +140,11 @@ export const ProcessCreateForm = () => {
       })
 
       // Setting up the CSP for the created election
+      const eId = `0x${pid}`
       const createdCspElection: IElectionWithTokenResponse = await createElectionInCsp(pid)
-      await saveAdminToken(pid, createdCspElection.adminToken)
+      await saveAdminToken(eId, createdCspElection.adminToken)
 
-      setTimeout(() => navigate(`/process/${pid}`), 3000)
+      setTimeout(() => navigate(`/processes/${eId}`), 3000)
     } catch (err: any) {
       if ('message' in err) {
         setError(err.message)
