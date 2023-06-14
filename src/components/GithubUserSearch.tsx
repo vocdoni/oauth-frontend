@@ -38,12 +38,16 @@ const GithubUserSearch = ({ ...props }) => {
       let ulist = []
       let response = await fetch(`https://api.github.com/search/users?q=${searchQuery}`)
       let data = await response.json()
-      ulist.push(...data.items)
+      if (data.items.length > 0) {
+        ulist.push(...data.items)
+      }
 
       // Adding organization members
       response = await fetch(`https://api.github.com/orgs/${searchQuery}/public_members`)
       data = await response.json()
-      ulist.push(...data)
+      if (data.length > 0) {
+        ulist.push(...data)
+      }
 
       setUserList(ulist)
     } catch (error) {
