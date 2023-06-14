@@ -22,6 +22,7 @@
     "ethers": "^5.7.0",
     "formik": "^2.2.9",
     "framer-motion": "^6.2.9",
+    "gh-pages": "^5.0.0",
     "i18next": "^22.5.0",
     "localforage": "^1.10.0",
     "react": "^18.1.0",
@@ -44,7 +45,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "translations": "i18next",
-    "lint:fix": "prettier --write src"
+    "lint:fix": "prettier --write src",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
