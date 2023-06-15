@@ -12,7 +12,6 @@ export type CspAdminProviderProps = {
 
 export const CspAdminProvider = ({ children, signer }: CspAdminProviderProps) => {
   const [vocdoniAdminClient, setVocdoniAdminClient] = useState<any>(null)
-  const [requestingSignature, setRequestingSignature] = useState<boolean>(false)
 
   useEffect(() => {
     ;(async function iife() {
