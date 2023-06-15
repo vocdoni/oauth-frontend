@@ -2,6 +2,7 @@
   "name": "oauth-frontend",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://vocdoni.github.io/oauth-frontend",
   "dependencies": {
     "@chakra-ui/icons": "^2.0.19",
     "@chakra-ui/react": "latest",
