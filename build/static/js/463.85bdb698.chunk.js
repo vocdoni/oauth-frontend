@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkoauth_frontend=self.webpackChunkoauth_frontend||[]).push([[463],{49463:function(e,n,t){t.r(n);var u=t(58467),o=t(26840),r=t(46417);n.default=function(){return(0,o.mA)().isConnected?(0,r.jsx)(u.j3,{}):(0,r.jsx)(u.Fg,{to:"/",replace:!0})}}}]);
