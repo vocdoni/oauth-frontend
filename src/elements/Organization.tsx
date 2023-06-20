@@ -19,7 +19,6 @@ const Organization = () => {
             <AlertIcon />
             {t('form.process_create.unhealthy_account')}
           </Alert>
-          <AccountCreate />
         </>
       )}
 

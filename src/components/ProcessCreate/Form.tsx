@@ -112,7 +112,7 @@ export const ProcessCreateForm = () => {
     try {
       const election = Election.from({
         ...data,
-        maxCensusSize: 100000, //TODO: make this configurable
+        maxCensusSize: 100, //TODO: make this configurable
         census: new CspCensus(process.env.REACT_APP_CSP_PUBKEY as string, process.env.REACT_APP_CSP_URL as string),
         // map questions back to IQuestion[]
         questions: data.questions.map(

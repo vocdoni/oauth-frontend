@@ -5838,9 +5838,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vocdoni/chakra-components@npm:latest":
-  version: 0.2.4
-  resolution: "@vocdoni/chakra-components@npm:0.2.4"
+"@vocdoni/chakra-components@npm:^0.2.6":
+  version: 0.2.6
+  resolution: "@vocdoni/chakra-components@npm:0.2.6"
+  dependencies:
+    "@vocdoni/sdk": ^0.0.13
+    date-fns: ^2.29.3
+    react-hook-form: ^7.43.8
+    react-icons: ^4.8.0
+    react-markdown: ^8.0.6
+    react-string-replace: ^1.1.0
+    remark-gfm: ^3.0.1
+    ts-deepmerge: ^6.0.3
   peerDependencies:
     "@chakra-ui/alert": ^2.0.18
     "@chakra-ui/button": ^2.0.18
@@ -5855,12 +5864,12 @@ __metadata:
     "@chakra-ui/tag": ^3.0.0
     "@chakra-ui/theme": ^3.0.0
     "@chakra-ui/toast": ^6.1.1
-    "@vocdoni/sdk": ">= 0.0.10"
+    "@vocdoni/sdk": ">= 0.0.13"
     react: ">= 16.8.0"
     react-dom: ">= 16.8.0"
     react-markdown: ">= 8.0.0"
     remark-gfm: ">= 2.0.0"
-  checksum: 59880061ba06a4951d12c7505cf6b6f9a595fde34633b2576eda96341d2da447b307ef54bffc19ae72a65a7ccddaf3416b43966207200cbf7f8707b2cb94b6b2
+  checksum: 7eca7bbe9110779edddd5216e68850a452e20e0f4620f2376b20242f1d564d62551c17769f28edcc7e5cbbbd521969d6956eeb71922eb7092d24e6d7350cb1f3
   languageName: node
   linkType: hard
 
@@ -5874,9 +5883,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vocdoni/sdk@npm:^0.0.12":
-  version: 0.0.12
-  resolution: "@vocdoni/sdk@npm:0.0.12"
+"@vocdoni/sdk@npm:^0.0.13":
+  version: 0.0.13
+  resolution: "@vocdoni/sdk@npm:0.0.13"
   dependencies:
     "@ethersproject/abstract-signer": ^5.7.0
     "@ethersproject/address": ^5.7.0
@@ -5894,7 +5903,31 @@ __metadata:
     tiny-invariant: ^1.3.1
     tweetnacl: ^1.0.3
     yup: ^0.32.11
-  checksum: 3f603ab756c20205aefb7d51f029418264513ac30996bd7d2276177887f0ee8f7217860215c26a73902ab9e7f7a6c52a7ba0aaa67dccf5df01873d54a65436e9
+  checksum: 6e26070a5fd162fb12e866bc3300fbe2f162ab9553cb3a638ae4e8155640dc16f77d722c1cc995eb1de2e899bfb1c83c2d8618eb40de75efb3fe338368952959
+  languageName: node
+  linkType: hard
+
+"@vocdoni/sdk@npm:^0.0.14":
+  version: 0.0.14
+  resolution: "@vocdoni/sdk@npm:0.0.14"
+  dependencies:
+    "@ethersproject/abstract-signer": ^5.7.0
+    "@ethersproject/address": ^5.7.0
+    "@ethersproject/bytes": ^5.7.0
+    "@ethersproject/keccak256": ^5.7.0
+    "@ethersproject/providers": ^5.7.1
+    "@ethersproject/signing-key": ^5.7.0
+    "@ethersproject/wallet": ^5.7.0
+    "@size-limit/file": ^8.2.4
+    "@vocdoni/proto": 1.14.1
+    axios: 0.27.2
+    blakejs: ^1.2.1
+    blindsecp256k1: ^0.0.9
+    iso-language-codes: ^1.1.0
+    tiny-invariant: ^1.3.1
+    tweetnacl: ^1.0.3
+    yup: ^0.32.11
+  checksum: 4eb9aa56d591f349da36274c104a1a67df53891446d3c3caf605f4bf73f3b6956a23518ee74acbf2e44dfb3aea00c4d3c4a37ae7e81e55cd0d1fb851694db9c0
   languageName: node
   linkType: hard
 
@@ -8732,7 +8765,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"date-fns@npm:^2.30.0":
+"date-fns@npm:^2.29.3, date-fns@npm:^2.30.0":
   version: 2.30.0
   resolution: "date-fns@npm:2.30.0"
   dependencies:
@@ -14731,8 +14764,8 @@ __metadata:
     "@types/node": ^12.0.0
     "@types/react": ^18.0.9
     "@types/react-dom": ^18.0.4
-    "@vocdoni/chakra-components": latest
-    "@vocdoni/sdk": ^0.0.12
+    "@vocdoni/chakra-components": ^0.2.6
+    "@vocdoni/sdk": ^0.0.14
     buffer: ^6.0.3
     date-fns: ^2.30.0
     ethers: ^5.7.0
@@ -16669,6 +16702,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-hook-form@npm:^7.43.8":
+  version: 7.45.0
+  resolution: "react-hook-form@npm:7.45.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17 || ^18
+  checksum: 3e35253f0efb0f77f5036c74f85cbdd425adb2fad20a14fc692d573fe552b3d9b7e7ac22193cd767f265fa292c33383d8721cfbdcc5ae41910a35a1ba3655f66
+  languageName: node
+  linkType: hard
+
 "react-hook-form@npm:^7.43.9":
   version: 7.43.9
   resolution: "react-hook-form@npm:7.43.9"
@@ -16707,6 +16749,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-icons@npm:^4.8.0":
+  version: 4.9.0
+  resolution: "react-icons@npm:4.9.0"
+  peerDependencies:
+    react: "*"
+  checksum: 69d1000d02349cf4baa78a0882aff09723d348d910256ea7489dea777abf10f158b27c1b5d3b1d2ec030e21320eae0afcc13f9c9d11afb85a8809c59a23a923c
+  languageName: node
+  linkType: hard
+
 "react-is@npm:^16.13.1, react-is@npm:^16.7.0":
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
@@ -16728,7 +16779,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-markdown@npm:^8.0.7":
+"react-markdown@npm:^8.0.6, react-markdown@npm:^8.0.7":
   version: 8.0.7
   resolution: "react-markdown@npm:8.0.7"
   dependencies:
@@ -16903,6 +16954,13 @@ __metadata:
   bin:
     react-scripts: bin/react-scripts.js
   checksum: 92afa2f245c7092ccc97d5609dc7a2130616262e34da7f15072d9442e2d2e1d4909a91022abd1faac1336eb17c5525a10d9bd43e1ae374c7ec941ca20addca68
+  languageName: node
+  linkType: hard
+
+"react-string-replace@npm:^1.1.0":
+  version: 1.1.1
+  resolution: "react-string-replace@npm:1.1.1"
+  checksum: fd5058bbb3953f4bb2daa7012630a154c6109e3e848f93925e146710cebf527647a7c1496c89ca0b5d9e4b4f8ffd5c55ca631539095039faaba0a7ba3787e7cb
   languageName: node
   linkType: hard
 
@@ -18852,6 +18910,13 @@ __metadata:
   version: 1.0.1
   resolution: "tryer@npm:1.0.1"
   checksum: 1cf14d7f67c79613f054b569bfc9a89c7020d331573a812dfcf7437244e8f8e6eb6893b210cbd9cc217f67c1d72617f89793df231e4fe7d53634ed91cf3a89d1
+  languageName: node
+  linkType: hard
+
+"ts-deepmerge@npm:^6.0.3":
+  version: 6.1.0
+  resolution: "ts-deepmerge@npm:6.1.0"
+  checksum: 8cdfe7eac402f0d0b2c776c1a4cd1b32df6a0dd71ea88586eb34a73b86975d4f59d39ee0c426c2169c1ae7773ac4557394ffea0ec20845c9c832d6bb0a29b16d
   languageName: node
   linkType: hard
 
