@@ -2,6 +2,7 @@ import { Box, Code, Flex, Grid, Icon, Img, Link, List, ListItem, Text } from '@c
 import { useTranslation } from 'react-i18next'
 import { FaDiscord, FaGithub, FaTwitter } from 'react-icons/fa'
 import vocdoni_logo from '../../assets/vocdoni_logo.svg'
+import powered_by_aragon from '../../assets/powered_by_aragon.png'
 
 const Footer = ({ ...props }) => {
   const { t } = useTranslation()
@@ -38,7 +39,7 @@ const Footer = ({ ...props }) => {
           gridRow={{ base: '5/6', md: '2/3', lg: '1/2' }}
         >
           <Img src={vocdoni_logo} maxW={36}></Img>
-          <Img src={`/powered_by_aragon.png`} maxW={36}></Img>
+          <Img src={powered_by_aragon} maxW={36}></Img>
         </Flex>
         <Flex flexDirection='column' alignItems={{ base: 'center', lg: 'start' }}>
           <Text fontWeight='bold' mb={4}>

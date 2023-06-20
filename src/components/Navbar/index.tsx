@@ -21,6 +21,7 @@ import { useTranslation } from 'react-i18next'
 import { LanguagesSlice } from '../../i18n/languages.mjs'
 import { useAccount } from 'wagmi'
 import { NavLink } from 'react-router-dom'
+import vocdoni_logo from '../../assets/vocdoni_logo.svg'
 
 const Navbar = ({ ...props }) => {
   const { onClose } = useDisclosure()
@@ -40,7 +41,7 @@ const Navbar = ({ ...props }) => {
     <Box as='nav' ref={refNav} {...props}>
       <Flex justify={'space-between'}>
         <a href='/' aria-current='page' aria-label='home'>
-          <Image src='/logo.svg' alt='logo' h={10} />
+          <Image src={vocdoni_logo} alt='logo' h={10} />
         </a>
 
         <List display={{ base: 'none', lg: 'flex' }} alignItems='center' gap={4}>
