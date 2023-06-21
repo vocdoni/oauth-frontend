@@ -14786,7 +14786,7 @@ __metadata:
     react-scripts: 5.0.1
     remark-gfm: ^3.0.1
     typescript: ^4.6.3
-    vocdoni-admin-sdk: "https://github.com/vocdoni/vocdoni-csp-admin-sdk.git"
+    vocdoni-admin-sdk: ^0.0.2
     wagmi: ^0.12.0
     web-vitals: ^2.1.4
   languageName: unknown
@@ -19580,15 +19580,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vocdoni-admin-sdk@https://github.com/vocdoni/vocdoni-csp-admin-sdk.git":
-  version: 0.0.1
-  resolution: "vocdoni-admin-sdk@https://github.com/vocdoni/vocdoni-csp-admin-sdk.git#commit=23786670e832d56ef06735f961b4173012ca4aec"
+"vocdoni-admin-sdk@npm:^0.0.2":
+  version: 0.0.2
+  resolution: "vocdoni-admin-sdk@npm:0.0.2"
   dependencies:
     "@size-limit/file": ^8.2.4
     axios: ^1.4.0
     blakejs: ^1.2.1
     ethers: ^5.7.0
-  checksum: 42392fabe15b0ce4bf232dad8983aabf8cd47470e9248291187478bead0ddbae2294ac0f9d30f3479614e3a0d7ae90c0e5f99a2fe79799706aa3b752f44d7882
+  checksum: caad696793dc4b71daf0770598e2104e908e45352dffebeb5c5b336fc6ce2d82d4f94f90de008bbfa306238e2d95609ccf35b65d194e426c5e676482722dbbec
   languageName: node
   linkType: hard
 
