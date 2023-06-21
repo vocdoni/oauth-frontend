@@ -19580,16 +19580,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vocdoni-admin-sdk@portal:/Users/aleix/Sites/vocdoni/vocdoni-csp-admin-sdk::locator=oauth-frontend%40workspace%3A.":
-  version: 0.0.0-use.local
-  resolution: "vocdoni-admin-sdk@portal:/Users/aleix/Sites/vocdoni/vocdoni-csp-admin-sdk::locator=oauth-frontend%40workspace%3A."
+"vocdoni-admin-sdk@https://github.com/vocdoni/vocdoni-csp-admin-sdk.git":
+  version: 0.0.1
+  resolution: "vocdoni-admin-sdk@https://github.com/vocdoni/vocdoni-csp-admin-sdk.git#commit=23786670e832d56ef06735f961b4173012ca4aec"
   dependencies:
     "@size-limit/file": ^8.2.4
     axios: ^1.4.0
     blakejs: ^1.2.1
     ethers: ^5.7.0
+  checksum: 42392fabe15b0ce4bf232dad8983aabf8cd47470e9248291187478bead0ddbae2294ac0f9d30f3479614e3a0d7ae90c0e5f99a2fe79799706aa3b752f44d7882
   languageName: node
-  linkType: soft
+  linkType: hard
 
 "void-elements@npm:3.1.0":
   version: 3.1.0

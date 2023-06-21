@@ -78,8 +78,5 @@
     "@types/i18next": "^13.0.0",
     "i18next-parser": "^8.0.0",
     "prettier": "^2.8.8"
-  },
-  "resolutions": {
-    "vocdoni-admin-sdk": "portal:/Users/aleix/Sites/vocdoni/vocdoni-csp-admin-sdk"
   }
 }
