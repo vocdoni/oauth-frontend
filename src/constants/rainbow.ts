@@ -16,7 +16,8 @@ const vocdoni = {
 export const { chains, provider } = configureChains([vocdoni], [publicProvider()])
 
 export const { connectors } = getDefaultWallets({
-  appName: "Vocdoni's Voting Protocol",
+  appName: "Vocdoni's Voting Protocol CSP admin",
+  projectId: 'vocdoni-csp-admin',
   chains,
 })
 
