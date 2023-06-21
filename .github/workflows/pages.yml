@@ -29,14 +29,13 @@ jobs:
 
       - name: Build CRA app dev
         run: yarn build
-        env:
-          GENERATE_SOURCEMAP=false
+        env: GENERATE_SOURCEMAP=false
           REACT_APP_VOCDONI_ENVIRONMENT=dev
-          REACT_APP_CSP_URL = http://localhost:5000/v1
+          REACT_APP_CSP_URL=http://localhost:5000/v1
           REACT_APP_CSP_PUBKEY=03ad3e786dc4af9d0acb0589ae066f64c19d37e63835c4bb77d3b11108f399f135
 
       - name: Create redirect index
-        run:  echo '<meta http-equiv="refresh" content="0;url=https://vocdoni.github.io/oauth-frontend" />' > build/index.html
+        run: echo '<meta http-equiv="refresh" content="0;url=https://vocdoni.github.io/oauth-frontend" />' > build/index.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
