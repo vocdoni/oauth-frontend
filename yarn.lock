@@ -5907,9 +5907,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vocdoni/sdk@npm:^0.0.14":
-  version: 0.0.14
-  resolution: "@vocdoni/sdk@npm:0.0.14"
+"@vocdoni/sdk@npm:^0.0.15":
+  version: 0.0.15
+  resolution: "@vocdoni/sdk@npm:0.0.15"
   dependencies:
     "@ethersproject/abstract-signer": ^5.7.0
     "@ethersproject/address": ^5.7.0
@@ -5927,7 +5927,7 @@ __metadata:
     tiny-invariant: ^1.3.1
     tweetnacl: ^1.0.3
     yup: ^0.32.11
-  checksum: 4eb9aa56d591f349da36274c104a1a67df53891446d3c3caf605f4bf73f3b6956a23518ee74acbf2e44dfb3aea00c4d3c4a37ae7e81e55cd0d1fb851694db9c0
+  checksum: 81e19c2904ba46b8b2caa3b6784ce6983eb29b2834f9520383c92746217fc0fe9f246ad15df0096452d9ade049de75e61672eff22d882a65cbcd16819ecf9d47
   languageName: node
   linkType: hard
 
@@ -14765,7 +14765,7 @@ __metadata:
     "@types/react": ^18.0.9
     "@types/react-dom": ^18.0.4
     "@vocdoni/chakra-components": ^0.2.6
-    "@vocdoni/sdk": ^0.0.14
+    "@vocdoni/sdk": ^0.0.15
     buffer: ^6.0.3
     date-fns: ^2.30.0
     ethers: ^5.7.0
