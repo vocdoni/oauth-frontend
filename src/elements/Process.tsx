@@ -84,6 +84,7 @@ const Process = () => {
 
       refreshUsers()
     })()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [vocdoniAdminClient, client, adminToken, id])
 
   const refreshUsers = async () => {

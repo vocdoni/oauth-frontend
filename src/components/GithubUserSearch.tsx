@@ -18,12 +18,14 @@ const GithubUserSearch = ({ ...props }) => {
     }
 
     setSearchTimeout(setTimeout(search, 500))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery])
 
   useEffect(() => {
     if (typeof props.onUpdateSelection === 'function') {
       props.onUpdateSelection(clickedUsers)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [clickedUsers])
 
   const handleInputChange = (text: string) => {
