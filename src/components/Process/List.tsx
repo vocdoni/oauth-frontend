@@ -1,5 +1,5 @@
 import { Flex, Grid, GridItem, Spinner, Text } from '@chakra-ui/react'
-import { useClient, useOrganization } from '@vocdoni/chakra-components'
+import { useClient, useOrganization } from '@vocdoni/react-providers'
 import { InvalidElection, PublishedElection } from '@vocdoni/sdk'
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'

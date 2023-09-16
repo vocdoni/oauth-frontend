@@ -16,7 +16,7 @@ export const CspAdminProvider = ({ children, signer }: CspAdminProviderProps) =>
   useEffect(() => {
     ;(async function iife() {
       const opts: CspAdminClientOptions = {
-        cspUrl: process.env.REACT_APP_CSP_URL + '/auth/elections/admin',
+        cspUrl: import.meta.env.REACT_APP_CSP_URL + '/auth/elections/admin',
       }
 
       if (signer) {

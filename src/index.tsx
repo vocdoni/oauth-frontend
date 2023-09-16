@@ -4,14 +4,9 @@ import './i18n'
 import reportWebVitals from './reportWebVitals'
 import * as serviceWorker from './serviceWorker'
 import { Providers } from './Providers'
-
 const container = document.getElementById('root')
 if (!container) throw new Error('Failed to find the root element')
 const root = ReactDOM.createRoot(container)
-
-// we could rewrite webpack configuration, but this is waaay easier...
-// fixes "buffer is not defined" errors from rainbowkit (and any other dependency)
-;(window as any).Buffer = (window as any).Buffer || require('buffer').Buffer
 
 root.render(
   <React.StrictMode>

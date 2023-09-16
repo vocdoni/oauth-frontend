@@ -1,5 +1,5 @@
 import { Alert, AlertIcon, Button, Flex, FormControl, FormLabel, useToast } from '@chakra-ui/react'
-import { useClient } from '@vocdoni/chakra-components'
+import { useClient } from '@vocdoni/react-providers'
 import { CspCensus, Election, IQuestion, PlainCensus, WeightedCensus } from '@vocdoni/sdk'
 import { useEffect, useState } from 'react'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
@@ -81,7 +81,7 @@ export const ProcessCreateForm = () => {
       electionType: {
         autoStart: false,
         interruptible: true,
-        secretUntilTheEnd: true,
+        secretUntilTheEnd: false,
       },
       maxVoteOverwrites: 0,
       weightedVote: false,
@@ -113,7 +113,10 @@ export const ProcessCreateForm = () => {
       const election = Election.from({
         ...data,
         maxCensusSize: 100, //TODO: make this configurable
-        census: new CspCensus(process.env.REACT_APP_CSP_PUBKEY as string, process.env.REACT_APP_CSP_URL as string),
+        census: new CspCensus(
+          import.meta.env.REACT_APP_CSP_PUBKEY as string,
+          import.meta.env.REACT_APP_CSP_URL as string
+        ),
         // map questions back to IQuestion[]
         questions: data.questions.map(
           (question) =>

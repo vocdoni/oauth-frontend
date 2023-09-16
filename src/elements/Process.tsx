@@ -33,9 +33,10 @@ import {
 import { AddIcon, CheckIcon, CloseIcon, DeleteIcon, RepeatIcon, SearchIcon } from '@chakra-ui/icons'
 import { Field, Form, Formik } from 'formik'
 import GithubUserSearch from '../components/GithubUserSearch'
-import { ElectionActions, ElectionProvider, useClient } from '@vocdoni/chakra-components'
+import { ElectionProvider, useClient } from '@vocdoni/react-providers'
 import { PublishedElection } from '@vocdoni/sdk'
 import { useTranslation } from 'react-i18next'
+import { ElectionActions } from '@vocdoni/chakra-components'
 
 const Process = () => {
   const { id } = useParams()

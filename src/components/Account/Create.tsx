@@ -11,7 +11,8 @@ import {
   Text,
   Textarea,
 } from '@chakra-ui/react'
-import { useClient } from '@vocdoni/chakra-components'
+import { useClient } from '@vocdoni/react-providers'
+
 import { Account } from '@vocdoni/sdk'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'

@@ -1,4 +1,4 @@
-import { OrganizationProvider, useClient } from '@vocdoni/chakra-components'
+import { OrganizationProvider, useClient } from '@vocdoni/react-providers'
 import ProcessList from '../Process/List'
 
 const OrganizationView = () => {

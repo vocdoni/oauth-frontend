@@ -1,9 +1,10 @@
 import { Box, Card, CardBody, CardHeader, Text } from '@chakra-ui/react'
-import { ElectionDescription, ElectionProvider, ElectionStatusBadge, ElectionTitle } from '@vocdoni/chakra-components'
+import { ElectionDescription, ElectionStatusBadge, ElectionTitle } from '@vocdoni/chakra-components'
 import { ElectionStatus, PublishedElection } from '@vocdoni/sdk'
 import { format } from 'date-fns'
 import { useTranslation } from 'react-i18next'
 import { ProcessDate } from './Date'
+import { ElectionProvider } from '@vocdoni/react-providers'
 
 const ProcessCardDescription = ({ election }: { election: PublishedElection }) => {
   const { t } = useTranslation()
